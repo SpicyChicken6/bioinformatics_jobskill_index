@@ -1,0 +1,76 @@
+{
+  "snapshot_date": "2026-03-14",
+  "automated_sources": [
+    {
+      "type": "Greenhouse API",
+      "company": "Neptune Bio",
+      "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/neptunebio/jobs?content=true",
+      "browse_url": "https://boards.greenhouse.io/neptunebio"
+    },
+    {
+      "type": "Greenhouse API",
+      "company": "NewLimit",
+      "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/newlimit/jobs?content=true",
+      "browse_url": "https://boards.greenhouse.io/newlimit"
+    },
+    {
+      "type": "Greenhouse API",
+      "company": "Recursion",
+      "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/recursionpharmaceuticals/jobs?content=true",
+      "browse_url": "https://boards.greenhouse.io/recursionpharmaceuticals"
+    },
+    {
+      "type": "Greenhouse API",
+      "company": "Hexagon Bio",
+      "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/hexagonbio/jobs?content=true",
+      "browse_url": "https://boards.greenhouse.io/hexagonbio"
+    },
+    {
+      "type": "Greenhouse API",
+      "company": "Profluent",
+      "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/profluent/jobs?content=true",
+      "browse_url": "https://boards.greenhouse.io/profluent"
+    },
+    {
+      "type": "Greenhouse API",
+      "company": "Natera",
+      "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/natera/jobs?content=true",
+      "browse_url": "https://boards.greenhouse.io/natera"
+    },
+    {
+      "type": "Greenhouse API",
+      "company": "Personalis",
+      "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/personalisinc/jobs?content=true",
+      "browse_url": "https://boards.greenhouse.io/personalisinc"
+    },
+    {
+      "type": "Greenhouse API",
+      "company": "LatchBio",
+      "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/latchbio/jobs?content=true",
+      "browse_url": "https://boards.greenhouse.io/latchbio"
+    },
+    {
+      "type": "Lever API",
+      "company": "GATC Health",
+      "endpoint_url": "https://api.lever.co/v0/postings/gatchealth?mode=json",
+      "browse_url": "https://jobs.lever.co/gatchealth"
+    },
+    {
+      "type": "Direct official careers page",
+      "company": "Dana-Farber Cancer Institute",
+      "endpoint_url": "https://careers.dana-farber.org/job/538/computational-biologist-it-informatics-us-ma-boston-450-brookline-ave/",
+      "browse_url": "https://careers.dana-farber.org/job/538/computational-biologist-it-informatics-us-ma-boston-450-brookline-ave/"
+    },
+    {
+      "type": "Direct official careers page",
+      "company": "Dana-Farber Cancer Institute",
+      "endpoint_url": "https://careers.dana-farber.org/job/446/computational-biologist-collins-genomics-lab-it-informatics-us-ma-boston-450-brookline-ave/",
+      "browse_url": "https://careers.dana-farber.org/job/446/computational-biologist-collins-genomics-lab-it-informatics-us-ma-boston-450-brookline-ave/"
+    }
+  ],
+  "linkedin": {
+    "automated_tracking": false,
+    "status": "Not included in CI ingestion",
+    "reason": "This project tracks official company ATS feeds and official career pages. LinkedIn automation is not enabled without approved LinkedIn partner access."
+  }
+}
