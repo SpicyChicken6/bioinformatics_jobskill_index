@@ -1,6 +1,7 @@
 ﻿const DATA_PATHS = {
   jobs: "./output/bioinformatics-jobs-board.csv",
   history: "./output/bioinformatics-trend-history.csv",
+  sources: "./output/bioinformatics-tracked-sources.json",
 };
 
 const METRIC_LABELS = {
@@ -36,6 +37,7 @@ const state = {
   jobs: [],
   history: [],
   summary: null,
+  sources: null,
   searchTerm: "",
   roleFilter: "",
   modeFilter: "",
@@ -54,6 +56,9 @@ const elements = {
   roleMix: document.querySelector("#roleMix"),
   modeMix: document.querySelector("#modeMix"),
   insightCards: document.querySelector("#insightCards"),
+  sourcesMeta: document.querySelector("#sourcesMeta"),
+  sourceGrid: document.querySelector("#sourceGrid"),
+  linkedinStatus: document.querySelector("#linkedinStatus"),
   jobsMeta: document.querySelector("#jobsMeta"),
   searchInput: document.querySelector("#searchInput"),
   roleFilter: document.querySelector("#roleFilter"),
@@ -69,13 +74,15 @@ async function init() {
   renderLoadingState();
 
   try {
-    const [jobsRows, historyRows] = await Promise.all([
+    const [jobsRows, historyRows, sourceCatalog] = await Promise.all([
       loadCsv(DATA_PATHS.jobs),
       loadCsv(DATA_PATHS.history),
+      loadOptionalJson(DATA_PATHS.sources),
     ]);
 
     state.jobs = jobsRows.map(normalizeJob).filter(Boolean);
     state.history = historyRows.map(normalizeHistory).filter(Boolean);
+    state.sources = sourceCatalog;
     state.summary = computeSummary(state.jobs, state.history);
 
     populateFilters();
@@ -134,6 +141,8 @@ function renderLoadingState() {
   elements.roleMix.innerHTML = loading;
   elements.modeMix.innerHTML = loading;
   elements.insightCards.innerHTML = loading;
+  elements.sourceGrid.innerHTML = loading;
+  elements.linkedinStatus.innerHTML = loading;
   elements.jobGrid.innerHTML = loading;
 }
 
@@ -144,6 +153,8 @@ function renderErrorState(message) {
   elements.roleMix.innerHTML = html;
   elements.modeMix.innerHTML = html;
   elements.insightCards.innerHTML = html;
+  elements.sourceGrid.innerHTML = html;
+  elements.linkedinStatus.innerHTML = html;
   elements.jobGrid.innerHTML = html;
 }
 
@@ -168,6 +179,14 @@ async function loadCsv(path) {
   }
 
   return parsed.data;
+}
+
+async function loadOptionalJson(path) {
+  const response = await fetch(path, { cache: "no-store" });
+  if (!response.ok) {
+    return null;
+  }
+  return response.json();
 }
 
 function normalizeJob(row) {
@@ -282,6 +301,7 @@ function renderPage() {
   renderHistory();
   renderMixPanels();
   renderInsights();
+  renderSources();
   renderJobs();
 }
 
@@ -301,6 +321,7 @@ function renderHero() {
     <div class="meta-row">
       <a class="resource-link" href="./output/bioinformatics-jobs-board.csv">Open jobs CSV</a>
       <a class="resource-link" href="./output/bioinformatics-skill-trends.md">Open trend summary</a>
+      <a class="resource-link" href="./output/bioinformatics-tracked-sources.json">Open source catalog</a>
       <a class="resource-link" href="./automation/weekly-refresh-playbook.md">Open refresh playbook</a>
     </div>
   `;
@@ -509,6 +530,41 @@ function populateFilters() {
   populateSelect(elements.skillFilter, uniqueValues(state.jobs.flatMap((job) => job.skillTags)));
 }
 
+function renderSources() {
+  const catalog = state.sources;
+  if (!catalog || !Array.isArray(catalog.automated_sources)) {
+    elements.sourcesMeta.textContent = "Tracked source catalog unavailable";
+    elements.sourceGrid.innerHTML = createEmptyState("No source catalog", "The dashboard data loaded, but the tracked-source manifest is missing.");
+    elements.linkedinStatus.innerHTML = createEmptyState("LinkedIn status unavailable", "No LinkedIn coverage note was found.");
+    return;
+  }
+
+  const automatedSources = catalog.automated_sources;
+  const typeCounts = countBy(automatedSources, "type");
+  elements.sourcesMeta.textContent = `${automatedSources.length} tracked feeds or official pages across ${typeCounts.length} source types`;
+  elements.sourceGrid.innerHTML = automatedSources
+    .map((source) => `
+      <article class="source-card">
+        <div class="source-type">${escapeHtml(source.type)}</div>
+        <h3>${escapeHtml(source.company)}</h3>
+        <p>${escapeHtml(source.browse_url)}</p>
+        <div class="source-links">
+          <a class="resource-link" href="${escapeHtml(source.browse_url)}" target="_blank" rel="noreferrer">Browse source</a>
+        </div>
+      </article>
+    `)
+    .join("");
+
+  const linkedin = catalog.linkedin || {};
+  const linkedInFlag = linkedin.automated_tracking ? "Enabled" : "Not enabled";
+  elements.linkedinStatus.innerHTML = `
+    <p class="section-kicker">LinkedIn</p>
+    <h3>${escapeHtml(linkedInFlag)}</h3>
+    <p>${escapeHtml(linkedin.status || "No LinkedIn status recorded.")}</p>
+    <p>${escapeHtml(linkedin.reason || "")}</p>
+  `;
+}
+
 function populateSelect(select, options) {
   select.innerHTML = ["<option value=\"\">All</option>"]
     .concat(options.map((value) => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`))
@@ -631,3 +687,4 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
 }
+

@@ -275,6 +275,8 @@ small,
 .metric-card,
 .insight-card,
 .job-card,
+.source-card,
+.linkedin-card,
 .empty-state {
   background: var(--surface-strong);
   border: 1px solid var(--line);
@@ -282,7 +284,9 @@ small,
 }
 
 .metric-card,
-.insight-card { padding: 1rem; border-radius: var(--radius-md); }
+.insight-card,
+.source-card,
+.linkedin-card { padding: 1rem; border-radius: var(--radius-md); }
 .metric-card p,
 .insight-card p,
 .job-card p,
@@ -290,7 +294,8 @@ small,
 .metric-card strong { display: block; font-size: 1.8rem; letter-spacing: -0.04em; }
 
 .mix-panel,
-.jobs-panel { grid-column: 1 / -1; }
+.jobs-panel,
+.sources-panel { grid-column: 1 / -1; }
 
 .mix-grid {
   display: grid;
@@ -350,6 +355,58 @@ small,
 .skill-pill { padding: 0.4rem 0.68rem; font-size: 0.8rem; background: rgba(13, 125, 114, 0.08); }
 .resource-link { display: inline-flex; padding: 0.55rem 0.85rem; text-decoration: none; background: rgba(255, 255, 255, 0.82); }
 
+.sources-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.9fr);
+  gap: 1rem;
+}
+
+.source-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.85rem;
+}
+
+.source-card,
+.linkedin-card {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.source-card h3,
+.linkedin-card h3 {
+  font-size: 1.15rem;
+}
+
+.source-card p,
+.linkedin-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.source-type {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.source-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.linkedin-card {
+  align-content: start;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.46)),
+    linear-gradient(135deg, rgba(45, 98, 121, 0.08), rgba(13, 125, 114, 0.08));
+}
+
 .empty-state {
   display: grid;
   place-items: center;
@@ -364,7 +421,8 @@ small,
 @media (max-width: 1120px) {
   .hero,
   .dashboard-grid,
-  .mix-grid { grid-template-columns: 1fr; }
+  .mix-grid,
+  .sources-layout { grid-template-columns: 1fr; }
   .hero-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .control-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -384,3 +442,4 @@ small,
   .skill-row,
   .mix-row { grid-template-columns: 1fr; }
 }
+

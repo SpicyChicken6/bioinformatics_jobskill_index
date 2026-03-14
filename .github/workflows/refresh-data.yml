@@ -41,12 +41,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          if git diff --quiet -- output/; then
+          if [ -z "$(git status --porcelain -- output/)" ]; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           git add output/
+
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
           git commit -m "Weekly data refresh"
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -67,3 +73,4 @@ jobs:
         if: steps.commit_changes.outputs.changed == 'true'
         id: deployment
         uses: actions/deploy-pages@v4
+

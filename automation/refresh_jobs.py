@@ -24,6 +24,7 @@ JOBS_CSV = OUTPUT_DIR / "bioinformatics-jobs-board.csv"
 JOBS_MD = OUTPUT_DIR / "bioinformatics-jobs-board.md"
 TRENDS_MD = OUTPUT_DIR / "bioinformatics-skill-trends.md"
 HISTORY_CSV = OUTPUT_DIR / "bioinformatics-trend-history.csv"
+SOURCES_JSON = OUTPUT_DIR / "bioinformatics-tracked-sources.json"
 
 USER_AGENT = "bioinformatics-hiring-index/1.0 (+https://github.com/SpicyChicken6/bioinformatics_jobskill_index)"
 TIMEZONE = ZoneInfo("America/Chicago")
@@ -257,6 +258,7 @@ def main() -> int:
     write_jobs_markdown(jobs)
     write_trends_markdown(jobs, warnings)
     write_history_csv(jobs)
+    write_sources_json()
 
     print(f"Wrote {len(jobs)} jobs for snapshot {SNAPSHOT_DATE}.")
     if warnings:
@@ -374,6 +376,56 @@ def fetch_text(url: str) -> str:
 
 def fetch_json(url: str) -> dict | list:
     return json.loads(fetch_text(url))
+
+def write_sources_json() -> None:
+    SOURCES_JSON.write_text(json.dumps(build_source_catalog(), indent=2) + "\n", encoding="utf-8")
+
+
+def build_source_catalog() -> dict[str, object]:
+    automated_sources: list[dict[str, str]] = []
+
+    for source in GREENHOUSE_SOURCES:
+        board_token = source["board_token"]
+        automated_sources.append(
+            {
+                "type": "Greenhouse API",
+                "company": source["company"],
+                "endpoint_url": f"https://boards-api.greenhouse.io/v1/boards/{board_token}/jobs?content=true",
+                "browse_url": f"https://boards.greenhouse.io/{board_token}",
+            }
+        )
+
+    for source in LEVER_SOURCES:
+        site = source["site"]
+        automated_sources.append(
+            {
+                "type": "Lever API",
+                "company": source["company"],
+                "endpoint_url": f"https://api.lever.co/v0/postings/{site}?mode=json",
+                "browse_url": f"https://jobs.lever.co/{site}",
+            }
+        )
+
+    for source in DIRECT_HTML_SOURCES:
+        automated_sources.append(
+            {
+                "type": "Direct official careers page",
+                "company": source["company"],
+                "endpoint_url": source["url"],
+                "browse_url": source["url"],
+            }
+        )
+
+    return {
+        "snapshot_date": SNAPSHOT_DATE,
+        "automated_sources": automated_sources,
+        "linkedin": {
+            "automated_tracking": False,
+            "status": "Not included in CI ingestion",
+            "reason": "This project tracks official company ATS feeds and official career pages. LinkedIn automation is not enabled without approved LinkedIn partner access.",
+        },
+    }
+
 
 
 def extract_lever_sections(item: dict) -> tuple[dict[str, list[str]], str]:
@@ -733,3 +785,4 @@ if __name__ == "__main__":
     except URLError as exc:
         print(f"Network error: {exc}", file=sys.stderr)
         raise
+
