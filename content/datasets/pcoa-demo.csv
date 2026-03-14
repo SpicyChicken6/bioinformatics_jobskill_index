@@ -1,0 +1,9 @@
+sample,pc1,pc2,cohort,batch
+CRC-01,0.42,-0.11,Case,B1
+CRC-02,0.37,0.09,Case,B1
+CRC-03,0.51,-0.02,Case,B2
+CRC-04,0.29,0.18,Case,B2
+HC-01,-0.31,-0.28,Control,B1
+HC-02,-0.24,-0.14,Control,B1
+HC-03,-0.41,0.06,Control,B2
+HC-04,-0.33,0.21,Control,B2
