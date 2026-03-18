@@ -1,72 +1,171 @@
 {
-  "snapshot_date": "2026-03-16",
+  "snapshot_date": "2026-03-18",
+  "summary": {
+    "active_source_count": 11,
+    "successful_source_count": 0,
+    "failed_source_count": 11,
+    "warning_count": 12,
+    "backlog_count": 6,
+    "todo_count": 4
+  },
   "automated_sources": [
     {
       "type": "Greenhouse API",
       "company": "Neptune Bio",
       "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/neptunebio/jobs?content=true",
-      "browse_url": "https://boards.greenhouse.io/neptunebio"
+      "browse_url": "https://boards.greenhouse.io/neptunebio",
+      "status": "error",
+      "jobs_found": 0,
+      "notes": "<urlopen error Tunnel connection failed: 403 Forbidden>"
     },
     {
       "type": "Greenhouse API",
       "company": "NewLimit",
       "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/newlimit/jobs?content=true",
-      "browse_url": "https://boards.greenhouse.io/newlimit"
+      "browse_url": "https://boards.greenhouse.io/newlimit",
+      "status": "error",
+      "jobs_found": 0,
+      "notes": "<urlopen error Tunnel connection failed: 403 Forbidden>"
     },
     {
       "type": "Greenhouse API",
       "company": "Recursion",
       "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/recursionpharmaceuticals/jobs?content=true",
-      "browse_url": "https://boards.greenhouse.io/recursionpharmaceuticals"
+      "browse_url": "https://boards.greenhouse.io/recursionpharmaceuticals",
+      "status": "error",
+      "jobs_found": 0,
+      "notes": "<urlopen error Tunnel connection failed: 403 Forbidden>"
     },
     {
       "type": "Greenhouse API",
       "company": "Hexagon Bio",
       "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/hexagonbio/jobs?content=true",
-      "browse_url": "https://boards.greenhouse.io/hexagonbio"
+      "browse_url": "https://boards.greenhouse.io/hexagonbio",
+      "status": "error",
+      "jobs_found": 0,
+      "notes": "<urlopen error Tunnel connection failed: 403 Forbidden>"
     },
     {
       "type": "Greenhouse API",
       "company": "Profluent",
       "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/profluent/jobs?content=true",
-      "browse_url": "https://boards.greenhouse.io/profluent"
+      "browse_url": "https://boards.greenhouse.io/profluent",
+      "status": "error",
+      "jobs_found": 0,
+      "notes": "<urlopen error Tunnel connection failed: 403 Forbidden>"
     },
     {
       "type": "Greenhouse API",
       "company": "Natera",
       "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/natera/jobs?content=true",
-      "browse_url": "https://boards.greenhouse.io/natera"
+      "browse_url": "https://boards.greenhouse.io/natera",
+      "status": "error",
+      "jobs_found": 0,
+      "notes": "<urlopen error Tunnel connection failed: 403 Forbidden>"
     },
     {
       "type": "Greenhouse API",
       "company": "Personalis",
       "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/personalisinc/jobs?content=true",
-      "browse_url": "https://boards.greenhouse.io/personalisinc"
+      "browse_url": "https://boards.greenhouse.io/personalisinc",
+      "status": "error",
+      "jobs_found": 0,
+      "notes": "<urlopen error Tunnel connection failed: 403 Forbidden>"
     },
     {
       "type": "Greenhouse API",
       "company": "LatchBio",
       "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/latchbio/jobs?content=true",
-      "browse_url": "https://boards.greenhouse.io/latchbio"
+      "browse_url": "https://boards.greenhouse.io/latchbio",
+      "status": "error",
+      "jobs_found": 0,
+      "notes": "<urlopen error Tunnel connection failed: 403 Forbidden>"
     },
     {
       "type": "Lever API",
       "company": "GATC Health",
       "endpoint_url": "https://api.lever.co/v0/postings/gatchealth?mode=json",
-      "browse_url": "https://jobs.lever.co/gatchealth"
+      "browse_url": "https://jobs.lever.co/gatchealth",
+      "status": "error",
+      "jobs_found": 0,
+      "notes": "<urlopen error Tunnel connection failed: 403 Forbidden>"
     },
     {
       "type": "Direct official careers page",
       "company": "Dana-Farber Cancer Institute",
       "endpoint_url": "https://careers.dana-farber.org/job/538/computational-biologist-it-informatics-us-ma-boston-450-brookline-ave/",
-      "browse_url": "https://careers.dana-farber.org/job/538/computational-biologist-it-informatics-us-ma-boston-450-brookline-ave/"
+      "browse_url": "https://careers.dana-farber.org/job/538/computational-biologist-it-informatics-us-ma-boston-450-brookline-ave/",
+      "status": "error",
+      "jobs_found": 0,
+      "notes": "<urlopen error Tunnel connection failed: 403 Forbidden>"
     },
     {
       "type": "Direct official careers page",
       "company": "Dana-Farber Cancer Institute",
       "endpoint_url": "https://careers.dana-farber.org/job/446/computational-biologist-collins-genomics-lab-it-informatics-us-ma-boston-450-brookline-ave/",
-      "browse_url": "https://careers.dana-farber.org/job/446/computational-biologist-collins-genomics-lab-it-informatics-us-ma-boston-450-brookline-ave/"
+      "browse_url": "https://careers.dana-farber.org/job/446/computational-biologist-collins-genomics-lab-it-informatics-us-ma-boston-450-brookline-ave/",
+      "status": "error",
+      "jobs_found": 0,
+      "notes": "<urlopen error Tunnel connection failed: 403 Forbidden>"
     }
+  ],
+  "expansion_backlog": [
+    {
+      "company": "Tempus",
+      "priority": "High",
+      "status": "Research official ATS endpoint",
+      "notes": "Add only after verifying an official company-hosted board or ATS API path."
+    },
+    {
+      "company": "Guardant Health",
+      "priority": "High",
+      "status": "Research official ATS endpoint",
+      "notes": "Important commercial genomics employer with analyst-adjacent demand signals."
+    },
+    {
+      "company": "10x Genomics",
+      "priority": "Medium",
+      "status": "Research official ATS endpoint",
+      "notes": "Useful for single-cell and platform-oriented skill signals."
+    },
+    {
+      "company": "Freenome",
+      "priority": "Medium",
+      "status": "Research official ATS endpoint",
+      "notes": "Likely to strengthen translational and biomarker coverage."
+    },
+    {
+      "company": "insitro",
+      "priority": "Medium",
+      "status": "Research official ATS endpoint",
+      "notes": "Potential ML and platform-bioinformatics signal expansion."
+    },
+    {
+      "company": "Arc Institute",
+      "priority": "Medium",
+      "status": "Research official ATS endpoint",
+      "notes": "Could add more research-heavy computational biology roles."
+    }
+  ],
+  "collection_todos": [
+    "Prioritize official ATS feeds that expose posted or updated timestamps so the board can enforce a last-365-days window.",
+    "Track source-level success and failure notes in the output manifest so the dashboard can show collection health each week.",
+    "Keep LinkedIn out of CI ingestion unless approved LinkedIn partner access is available; use official company career endpoints instead.",
+    "Review the backlog quarterly and promote verified official sources into the active automated set."
+  ],
+  "warnings": [
+    "Greenhouse source 'neptunebio' failed: <urlopen error Tunnel connection failed: 403 Forbidden>",
+    "Greenhouse source 'newlimit' failed: <urlopen error Tunnel connection failed: 403 Forbidden>",
+    "Greenhouse source 'recursionpharmaceuticals' failed: <urlopen error Tunnel connection failed: 403 Forbidden>",
+    "Greenhouse source 'hexagonbio' failed: <urlopen error Tunnel connection failed: 403 Forbidden>",
+    "Greenhouse source 'profluent' failed: <urlopen error Tunnel connection failed: 403 Forbidden>",
+    "Greenhouse source 'natera' failed: <urlopen error Tunnel connection failed: 403 Forbidden>",
+    "Greenhouse source 'personalisinc' failed: <urlopen error Tunnel connection failed: 403 Forbidden>",
+    "Greenhouse source 'latchbio' failed: <urlopen error Tunnel connection failed: 403 Forbidden>",
+    "Lever source 'gatchealth' failed: <urlopen error Tunnel connection failed: 403 Forbidden>",
+    "Direct source 'https://careers.dana-farber.org/job/538/computational-biologist-it-informatics-us-ma-boston-450-brookline-ave/' failed: <urlopen error Tunnel connection failed: 403 Forbidden>",
+    "Direct source 'https://careers.dana-farber.org/job/446/computational-biologist-collins-genomics-lab-it-informatics-us-ma-boston-450-brookline-ave/' failed: <urlopen error Tunnel connection failed: 403 Forbidden>",
+    "No live jobs were fetched during this run; reusing the existing jobs-board CSV as a cache fallback."
   ],
   "linkedin": {
     "automated_tracking": false,

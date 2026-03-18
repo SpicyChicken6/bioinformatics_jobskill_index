@@ -1,6 +1,6 @@
 # Bioinformatics Skill Trends
 
-Snapshot date: 2026-03-16  
+Snapshot date: 2026-03-18  
 Verified live roles: 16  
 Unique companies: 9
 
@@ -48,8 +48,18 @@ Unique companies: 9
 - Explicit workflow engines such as Nextflow, WDL, or Snakemake appear in 0/16 roles.
 
 ## Source notes
-- Greenhouse source 'latchbio' failed: HTTP Error 404: Not Found
-- Direct source 'https://careers.dana-farber.org/job/446/computational-biologist-collins-genomics-lab-it-informatics-us-ma-boston-450-brookline-ave/' failed: HTTP Error 410: Gone
+- Greenhouse source 'neptunebio' failed: <urlopen error Tunnel connection failed: 403 Forbidden>
+- Greenhouse source 'newlimit' failed: <urlopen error Tunnel connection failed: 403 Forbidden>
+- Greenhouse source 'recursionpharmaceuticals' failed: <urlopen error Tunnel connection failed: 403 Forbidden>
+- Greenhouse source 'hexagonbio' failed: <urlopen error Tunnel connection failed: 403 Forbidden>
+- Greenhouse source 'profluent' failed: <urlopen error Tunnel connection failed: 403 Forbidden>
+- Greenhouse source 'natera' failed: <urlopen error Tunnel connection failed: 403 Forbidden>
+- Greenhouse source 'personalisinc' failed: <urlopen error Tunnel connection failed: 403 Forbidden>
+- Greenhouse source 'latchbio' failed: <urlopen error Tunnel connection failed: 403 Forbidden>
+- Lever source 'gatchealth' failed: <urlopen error Tunnel connection failed: 403 Forbidden>
+- Direct source 'https://careers.dana-farber.org/job/538/computational-biologist-it-informatics-us-ma-boston-450-brookline-ave/' failed: <urlopen error Tunnel connection failed: 403 Forbidden>
+- Direct source 'https://careers.dana-farber.org/job/446/computational-biologist-collins-genomics-lab-it-informatics-us-ma-boston-450-brookline-ave/' failed: <urlopen error Tunnel connection failed: 403 Forbidden>
+- No live jobs were fetched during this run; reusing the existing jobs-board CSV as a cache fallback.
 
 ## Source files
 - `bioinformatics-jobs-board.csv`
