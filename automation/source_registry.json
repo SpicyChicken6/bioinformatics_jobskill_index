@@ -1,0 +1,111 @@
+{
+  "active_sources": {
+    "greenhouse": [
+      {
+        "board_token": "neptunebio",
+        "company": "Neptune Bio",
+        "default_work_mode": "On-site"
+      },
+      {
+        "board_token": "newlimit",
+        "company": "NewLimit",
+        "default_work_mode": "On-site"
+      },
+      {
+        "board_token": "recursionpharmaceuticals",
+        "company": "Recursion",
+        "default_work_mode": "Hybrid"
+      },
+      {
+        "board_token": "hexagonbio",
+        "company": "Hexagon Bio",
+        "default_work_mode": "On-site"
+      },
+      {
+        "board_token": "profluent",
+        "company": "Profluent",
+        "default_work_mode": "On-site"
+      },
+      {
+        "board_token": "natera",
+        "company": "Natera",
+        "default_work_mode": "Hybrid"
+      },
+      {
+        "board_token": "personalisinc",
+        "company": "Personalis",
+        "default_work_mode": "Hybrid"
+      },
+      {
+        "board_token": "latchbio",
+        "company": "LatchBio",
+        "default_work_mode": "On-site"
+      }
+    ],
+    "lever": [
+      {
+        "site": "gatchealth",
+        "company": "GATC Health",
+        "default_work_mode": "Remote"
+      }
+    ],
+    "direct_html": [
+      {
+        "company": "Dana-Farber Cancer Institute",
+        "url": "https://careers.dana-farber.org/job/538/computational-biologist-it-informatics-us-ma-boston-450-brookline-ave/",
+        "default_location": "Boston, MA",
+        "default_work_mode": "On-site"
+      },
+      {
+        "company": "Dana-Farber Cancer Institute",
+        "url": "https://careers.dana-farber.org/job/446/computational-biologist-collins-genomics-lab-it-informatics-us-ma-boston-450-brookline-ave/",
+        "default_location": "Boston, MA",
+        "default_work_mode": "On-site"
+      }
+    ]
+  },
+  "expansion_backlog": [
+    {
+      "company": "Tempus",
+      "priority": "High",
+      "status": "Research official ATS endpoint",
+      "notes": "Add only after verifying an official company-hosted board or ATS API path."
+    },
+    {
+      "company": "Guardant Health",
+      "priority": "High",
+      "status": "Research official ATS endpoint",
+      "notes": "Important commercial genomics employer with analyst-adjacent demand signals."
+    },
+    {
+      "company": "10x Genomics",
+      "priority": "Medium",
+      "status": "Research official ATS endpoint",
+      "notes": "Useful for single-cell and platform-oriented skill signals."
+    },
+    {
+      "company": "Freenome",
+      "priority": "Medium",
+      "status": "Research official ATS endpoint",
+      "notes": "Likely to strengthen translational and biomarker coverage."
+    },
+    {
+      "company": "insitro",
+      "priority": "Medium",
+      "status": "Research official ATS endpoint",
+      "notes": "Potential ML and platform-bioinformatics signal expansion."
+    },
+    {
+      "company": "Arc Institute",
+      "priority": "Medium",
+      "status": "Research official ATS endpoint",
+      "notes": "Could add more research-heavy computational biology roles."
+    }
+  ],
+  "collection_todos": [
+    "Prioritize official ATS feeds that expose posted or updated timestamps so the board can enforce a last-365-days window.",
+    "Track source-level success and failure notes in the output manifest so the dashboard can show collection health each week.",
+    "Keep LinkedIn out of CI ingestion unless approved LinkedIn partner access is available; use official company career endpoints instead.",
+    "Review the backlog quarterly and promote verified official sources into the active automated set."
+  ]
+}
