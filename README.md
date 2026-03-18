@@ -29,9 +29,14 @@ The CI refresh currently uses these automated source groups:
 - Lever API: GATC Health
 - Direct official careers pages: Dana-Farber Cancer Institute
 
-Those sources are published to `output/bioinformatics-tracked-sources.json` and rendered on the dashboard.
+Those sources are published to `output/bioinformatics-tracked-sources.json` and rendered on the dashboard. The active automated list and the next-source backlog now live in `automation/source_registry.json`, so you can expand approved coverage without editing Python constants directly.
 
 LinkedIn is not part of the CI ingestion path. The project intentionally tracks official ATS feeds and official company career pages instead. If you need LinkedIn-specific ingestion, that should be done through approved LinkedIn partner access rather than scraping.
+
+## Current improvement backlog
+- Expand the approved-source footprint by promoting vetted companies from `automation/source_registry.json` into the active automated list.
+- Prefer ATS feeds that expose posted or updated timestamps so the board can enforce a last-year window when the source supports it.
+- Use the source manifest to monitor per-source refresh health and quickly spot coverage regressions before they affect the dashboard.
 
 ## Local preview
 Serve the folder over HTTP so the browser can fetch the CSV files:
@@ -42,4 +47,3 @@ python -m http.server 4173
 ```
 
 Then open `http://127.0.0.1:4173/`.
-

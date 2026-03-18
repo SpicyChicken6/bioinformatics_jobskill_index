@@ -17,12 +17,15 @@ Refresh the bioinformatics jobs board once per week and keep a simple longitudin
 - `output/bioinformatics-jobs-board.md`
 - `output/bioinformatics-skill-trends.md`
 - `output/bioinformatics-trend-history.csv`
+- `output/bioinformatics-tracked-sources.json`
 
 ## Workflow
-1. Pull jobs from the tracked public Greenhouse and Lever sources.
-2. Pull the small direct official-page fallback set.
-3. Remove closed roles that no longer appear.
-4. Normalize each role into:
+1. Review `automation/source_registry.json` and confirm the active sources plus backlog are still accurate.
+2. Pull jobs from the tracked public Greenhouse and Lever sources.
+3. Pull the small direct official-page fallback set.
+4. Record source-level collection status so the dashboard can show refresh health and coverage gaps.
+5. Remove closed roles that no longer appear.
+6. Normalize each role into:
    - company
    - title
    - role family
@@ -33,8 +36,8 @@ Refresh the bioinformatics jobs board once per week and keep a simple longitudin
    - 2 to 3 requirements
    - normalized skill tags
    - source URL
-5. Recompute the trend summary and append or replace the current snapshot-date row in the history file.
-6. Commit the refreshed `output/` files from CI and deploy Pages.
+7. Recompute the trend summary and append or replace the current snapshot-date row in the history file.
+8. Commit the refreshed `output/` files from CI and deploy Pages.
 
 ## Current schedule
 The GitHub Actions workflow runs every Monday at 14:00 UTC. That is 9:00 AM during daylight saving time in America/Chicago and 8:00 AM during standard time.
@@ -42,3 +45,4 @@ The GitHub Actions workflow runs every Monday at 14:00 UTC. That is 9:00 AM duri
 ## Notes
 - The refresh date is the retrieval date, not the posting date.
 - Non-API boards may require occasional source maintenance if their HTML structure changes.
+- If all live fetches fail, the refresh script now falls back to the existing jobs CSV instead of overwriting the site with an empty dataset.
