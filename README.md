@@ -1,4 +1,4 @@
-﻿# Bioinformatics Hiring Trend Index
+# Bioinformatics Hiring Trend Index
 
 This folder contains the static site for the live bioinformatics jobs dashboard published at GitHub Pages. The page reads the generated files in `output/` and renders:
 

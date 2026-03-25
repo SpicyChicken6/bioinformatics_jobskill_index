@@ -1,4 +1,4 @@
-﻿# Weekly Refresh Playbook
+# Weekly Refresh Playbook
 
 ## Goal
 Refresh the bioinformatics jobs board once per week and keep a simple longitudinal trend history.
