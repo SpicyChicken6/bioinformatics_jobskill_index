@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -38,6 +38,7 @@
             <p id="trendMeta" class="panel-note"></p>
           </div>
           <div id="skillIndex" class="skill-index"></div>
+          <div id="skillSpotlight" class="skill-spotlight"></div>
         </section>
 
         <section class="panel history-panel" aria-labelledby="historyHeading">
@@ -108,6 +109,20 @@
               <span>Skill tag</span>
               <select id="skillFilter"></select>
             </label>
+            <label class="control-field" for="sortFilter">
+              <span>Sort by</span>
+              <select id="sortFilter">
+                <option value="relevance">Best match</option>
+                <option value="company">Company</option>
+                <option value="role">Role family</option>
+                <option value="location">Location</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="jobs-toolbar">
+            <div id="quickFilters" class="quick-filters"></div>
+            <button id="resetFilters" class="ghost-button" type="button">Reset filters</button>
           </div>
 
           <div id="jobGrid" class="job-grid"></div>
@@ -123,8 +138,15 @@
           </div>
 
           <div class="sources-layout">
-            <div id="sourceGrid" class="source-grid"></div>
-            <aside id="linkedinStatus" class="linkedin-card"></aside>
+            <div class="sources-main">
+              <div id="sourceHealth" class="source-health"></div>
+              <div id="sourceGrid" class="source-grid"></div>
+            </div>
+            <aside class="sources-aside">
+              <div id="linkedinStatus" class="linkedin-card"></div>
+              <div id="coverageBacklog" class="backlog-card"></div>
+              <div id="collectionTodos" class="todo-card"></div>
+            </aside>
           </div>
         </section>
       </main>
@@ -134,4 +156,3 @@
     <script type="module" src="./assets/app.js"></script>
   </body>
 </html>
-

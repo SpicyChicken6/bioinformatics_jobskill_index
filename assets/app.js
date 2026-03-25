@@ -1,4 +1,4 @@
-﻿const DATA_PATHS = {
+const DATA_PATHS = {
   jobs: "./output/bioinformatics-jobs-board.csv",
   history: "./output/bioinformatics-trend-history.csv",
   sources: "./output/bioinformatics-tracked-sources.json",
@@ -42,6 +42,8 @@ const state = {
   roleFilter: "",
   modeFilter: "",
   skillFilter: "",
+  sortFilter: "relevance",
+  quickSkill: "",
   historyMetric: "total_roles",
 };
 
@@ -50,6 +52,7 @@ const elements = {
   heroStats: document.querySelector("#heroStats"),
   trendMeta: document.querySelector("#trendMeta"),
   skillIndex: document.querySelector("#skillIndex"),
+  skillSpotlight: document.querySelector("#skillSpotlight"),
   historyMetric: document.querySelector("#historyMetric"),
   historyChart: document.querySelector("#historyChart"),
   historySummary: document.querySelector("#historySummary"),
@@ -57,13 +60,19 @@ const elements = {
   modeMix: document.querySelector("#modeMix"),
   insightCards: document.querySelector("#insightCards"),
   sourcesMeta: document.querySelector("#sourcesMeta"),
+  sourceHealth: document.querySelector("#sourceHealth"),
   sourceGrid: document.querySelector("#sourceGrid"),
   linkedinStatus: document.querySelector("#linkedinStatus"),
+  coverageBacklog: document.querySelector("#coverageBacklog"),
+  collectionTodos: document.querySelector("#collectionTodos"),
   jobsMeta: document.querySelector("#jobsMeta"),
   searchInput: document.querySelector("#searchInput"),
   roleFilter: document.querySelector("#roleFilter"),
   modeFilter: document.querySelector("#modeFilter"),
   skillFilter: document.querySelector("#skillFilter"),
+  sortFilter: document.querySelector("#sortFilter"),
+  quickFilters: document.querySelector("#quickFilters"),
+  resetFilters: document.querySelector("#resetFilters"),
   jobGrid: document.querySelector("#jobGrid"),
 };
 
@@ -83,7 +92,7 @@ async function init() {
     state.jobs = jobsRows.map(normalizeJob).filter(Boolean);
     state.history = historyRows.map(normalizeHistory).filter(Boolean);
     state.sources = sourceCatalog;
-    state.summary = computeSummary(state.jobs, state.history);
+    state.summary = computeSummary(state.jobs, state.history, state.sources);
 
     populateFilters();
     populateHistoryMetricSelector();
@@ -111,12 +120,37 @@ function attachEvents() {
 
   elements.skillFilter.addEventListener("change", (event) => {
     state.skillFilter = event.target.value;
+    state.quickSkill = event.target.value;
+    renderQuickFilters();
+    renderJobs();
+  });
+
+  elements.sortFilter.addEventListener("change", (event) => {
+    state.sortFilter = event.target.value;
     renderJobs();
   });
 
   elements.historyMetric.addEventListener("change", (event) => {
     state.historyMetric = event.target.value;
     renderHistory();
+  });
+
+  elements.resetFilters.addEventListener("click", () => {
+    state.searchTerm = "";
+    state.roleFilter = "";
+    state.modeFilter = "";
+    state.skillFilter = "";
+    state.sortFilter = "relevance";
+    state.quickSkill = "";
+
+    elements.searchInput.value = "";
+    elements.roleFilter.value = "";
+    elements.modeFilter.value = "";
+    elements.skillFilter.value = "";
+    elements.sortFilter.value = "relevance";
+
+    renderQuickFilters();
+    renderJobs();
   });
 }
 
@@ -137,24 +171,33 @@ function renderLoadingState() {
 
   const loading = createEmptyState("Loading", "Fetching the current board snapshot.");
   elements.skillIndex.innerHTML = loading;
+  elements.skillSpotlight.innerHTML = loading;
   elements.historyChart.innerHTML = loading;
   elements.roleMix.innerHTML = loading;
   elements.modeMix.innerHTML = loading;
   elements.insightCards.innerHTML = loading;
+  elements.sourceHealth.innerHTML = loading;
   elements.sourceGrid.innerHTML = loading;
   elements.linkedinStatus.innerHTML = loading;
+  elements.coverageBacklog.innerHTML = loading;
+  elements.collectionTodos.innerHTML = loading;
   elements.jobGrid.innerHTML = loading;
+  elements.quickFilters.innerHTML = "";
 }
 
 function renderErrorState(message) {
   const html = createEmptyState("Dashboard could not load", message);
   elements.skillIndex.innerHTML = html;
+  elements.skillSpotlight.innerHTML = html;
   elements.historyChart.innerHTML = html;
   elements.roleMix.innerHTML = html;
   elements.modeMix.innerHTML = html;
   elements.insightCards.innerHTML = html;
+  elements.sourceHealth.innerHTML = html;
   elements.sourceGrid.innerHTML = html;
   elements.linkedinStatus.innerHTML = html;
+  elements.coverageBacklog.innerHTML = html;
+  elements.collectionTodos.innerHTML = html;
   elements.jobGrid.innerHTML = html;
 }
 
@@ -231,7 +274,7 @@ function splitList(value) {
     .filter(Boolean);
 }
 
-function computeSummary(jobs, history) {
+function computeSummary(jobs, history, sources) {
   const totalRoles = jobs.length;
   const uniqueCompanies = new Set(jobs.map((job) => job.company)).size;
   const roleMix = countBy(jobs, "roleFamily");
@@ -257,9 +300,26 @@ function computeSummary(jobs, history) {
     remoteCount: getCount(modeMix, "Remote"),
     hybridCount: getCount(modeMix, "Hybrid"),
     onsiteCount: getCount(modeMix, "On-site"),
+    analystCount: getCount(roleMix, "Bioinformatics Analyst"),
+    sourceSummary: computeSourceSummary(sources),
     leadingTechnicalSkill: TECHNICAL_PRIORITY
       .map((label) => skillIndex.find((entry) => entry.label === label))
       .find(Boolean) || skillIndex[0] || null,
+  };
+}
+
+function computeSourceSummary(catalog) {
+  if (!catalog || !Array.isArray(catalog.automated_sources)) {
+    return null;
+  }
+  const entries = catalog.automated_sources;
+  return {
+    total: entries.length,
+    successful: entries.filter((entry) => entry.status === "ok").length,
+    failed: entries.filter((entry) => entry.status === "error").length,
+    empty: entries.filter((entry) => entry.status === "empty").length,
+    backlog: Array.isArray(catalog.expansion_backlog) ? catalog.expansion_backlog.length : 0,
+    todos: Array.isArray(catalog.collection_todos) ? catalog.collection_todos.length : 0,
   };
 }
 
@@ -302,6 +362,7 @@ function renderPage() {
   renderMixPanels();
   renderInsights();
   renderSources();
+  renderQuickFilters();
   renderJobs();
 }
 
@@ -311,12 +372,13 @@ function renderHero() {
   elements.heroCopy.innerHTML = `
     <p class="section-kicker">Bioinformatics hiring monitor</p>
     <h1>Trend index for live bioinformatics roles</h1>
-    <p class="hero-subtitle">A static dashboard fed by weekly CI refreshes and GitHub Pages deploys.</p>
-    <p class="hero-intro">The page reads <code class="code-like">bioinformatics-jobs-board.csv</code> and <code class="code-like">bioinformatics-trend-history.csv</code> directly from the repository output folder. Scheduled CI only needs to refresh those files.</p>
+    <p class="hero-subtitle">A cleaner weekly dashboard for skill signals, source health, and current analyst-adjacent openings.</p>
+    <p class="hero-intro">The page reads <code class="code-like">bioinformatics-jobs-board.csv</code>, <code class="code-like">bioinformatics-trend-history.csv</code>, and the tracked-source manifest directly from the repository output folder. CI only needs to refresh those files.</p>
     <div class="callout-row">
       <span class="callout-pill">Last snapshot: ${escapeHtml(formattedDate)}</span>
       <span class="callout-pill">Current roles: ${summary.totalRoles}</span>
       <span class="callout-pill">Unique companies: ${summary.uniqueCompanies}</span>
+      <span class="callout-pill">Analyst roles: ${summary.analystCount}</span>
     </div>
     <div class="meta-row">
       <a class="resource-link" href="./output/bioinformatics-jobs-board.csv">Open jobs CSV</a>
@@ -340,8 +402,8 @@ function renderHero() {
       <span class="stat-label">Top technical signal: ${escapeHtml(summary.leadingTechnicalSkill?.label || "Unavailable")}</span>
     </article>
     <article class="stat-card">
-      <span class="stat-value">${roundShare(summary.onsiteCount + summary.hybridCount, summary.totalRoles)}%</span>
-      <span class="stat-label">On-site or hybrid footprint; ${summary.remoteCount}/${summary.totalRoles} roles are remote</span>
+      <span class="stat-value">${summary.sourceSummary?.backlog || 0}</span>
+      <span class="stat-label">Approved source-expansion candidates tracked in the backlog</span>
     </article>
   `;
 }
@@ -362,6 +424,17 @@ function renderSkillIndex() {
       </article>
     `)
     .join("");
+
+  const topThree = skillIndex.slice(0, 3);
+  elements.skillSpotlight.innerHTML = topThree.length
+    ? `
+      <article class="spotlight-card">
+        <p class="section-kicker">What to watch</p>
+        <h3>${escapeHtml(topThree[0].label)}</h3>
+        <p>${escapeHtml(topThree.map((entry) => `${entry.label} (${entry.count}/${totalRoles})`).join(" • "))}</p>
+      </article>
+    `
+    : "";
 }
 
 function populateHistoryMetricSelector() {
@@ -494,23 +567,23 @@ function renderInsights() {
   const insights = [
     {
       title: "Baseline stack",
-      body: `Python appears in ${summary.pythonCount}/${summary.totalRoles} roles and pipeline work appears in ${summary.pipelinesCount}/${summary.totalRoles}. That remains the clearest common denominator.`
+      body: `Python appears in ${summary.pythonCount}/${summary.totalRoles} roles and pipeline work appears in ${summary.pipelinesCount}/${summary.totalRoles}. That remains the clearest common denominator.`,
     },
     {
       title: "Commercial concentration",
-      body: `${summary.oncologyCount}/${summary.totalRoles} roles are linked to oncology, liquid biopsy, or biomarker programs. The sample is still commercially cancer-heavy.`
+      body: `${summary.oncologyCount}/${summary.totalRoles} roles are linked to oncology, liquid biopsy, or biomarker programs. The sample is still commercially cancer-heavy.`,
     },
     {
       title: "Execution bar",
-      body: `Cloud appears in ${summary.cloudCount}/${summary.totalRoles} roles, ML or AI in ${summary.mlCount}/${summary.totalRoles}, and explicit workflow engines in ${summary.workflowCount}/${summary.totalRoles}. The market expects delivery, not just analysis.`
+      body: `Cloud appears in ${summary.cloudCount}/${summary.totalRoles} roles, ML or AI in ${summary.mlCount}/${summary.totalRoles}, and explicit workflow engines in ${summary.workflowCount}/${summary.totalRoles}. The market expects delivery, not just analysis.`,
     },
     {
       title: "Work footprint",
-      body: `${summary.onsiteCount + summary.hybridCount}/${summary.totalRoles} roles are on-site or hybrid, while ${summary.remoteCount}/${summary.totalRoles} are remote.`
+      body: `${summary.onsiteCount + summary.hybridCount}/${summary.totalRoles} roles are on-site or hybrid, while ${summary.remoteCount}/${summary.totalRoles} are remote.`,
     },
     {
       title: "Research frontier",
-      body: `${summary.singleCellCount}/${summary.totalRoles} roles explicitly ask for single-cell or multi-omics depth. It is still valuable, but not the universal baseline.`
+      body: `${summary.singleCellCount}/${summary.totalRoles} roles explicitly ask for single-cell or multi-omics depth. It is still valuable, but not the universal baseline.`,
     },
   ];
 
@@ -534,20 +607,28 @@ function renderSources() {
   const catalog = state.sources;
   if (!catalog || !Array.isArray(catalog.automated_sources)) {
     elements.sourcesMeta.textContent = "Tracked source catalog unavailable";
+    elements.sourceHealth.innerHTML = createEmptyState("No source health", "Run a refresh to capture source-level status.");
     elements.sourceGrid.innerHTML = createEmptyState("No source catalog", "The dashboard data loaded, but the tracked-source manifest is missing.");
     elements.linkedinStatus.innerHTML = createEmptyState("LinkedIn status unavailable", "No LinkedIn coverage note was found.");
+    elements.coverageBacklog.innerHTML = createEmptyState("No backlog", "Add future sources to the source registry to see them here.");
+    elements.collectionTodos.innerHTML = createEmptyState("No collection TODOs", "Collection tasks will appear here when the source manifest includes them.");
     return;
   }
 
   const automatedSources = catalog.automated_sources;
   const typeCounts = countBy(automatedSources, "type");
   elements.sourcesMeta.textContent = `${automatedSources.length} tracked feeds or official pages across ${typeCounts.length} source types`;
+  renderSourceHealth(catalog);
   elements.sourceGrid.innerHTML = automatedSources
     .map((source) => `
       <article class="source-card">
-        <div class="source-type">${escapeHtml(source.type)}</div>
+        <div class="source-card-head">
+          <div class="source-type">${escapeHtml(source.type)}</div>
+          <span class="status-pill status-${escapeHtml(source.status || "unknown")}">${escapeHtml(formatSourceStatus(source.status))}</span>
+        </div>
         <h3>${escapeHtml(source.company)}</h3>
         <p>${escapeHtml(source.browse_url)}</p>
+        <p class="source-note">${escapeHtml(source.jobs_found || 0)} matching roles found${source.notes ? ` • ${escapeHtml(source.notes)}` : ""}</p>
         <div class="source-links">
           <a class="resource-link" href="${escapeHtml(source.browse_url)}" target="_blank" rel="noreferrer">Browse source</a>
         </div>
@@ -563,12 +644,112 @@ function renderSources() {
     <p>${escapeHtml(linkedin.status || "No LinkedIn status recorded.")}</p>
     <p>${escapeHtml(linkedin.reason || "")}</p>
   `;
+
+  renderCoverageBacklog(catalog.expansion_backlog || []);
+  renderCollectionTodos(catalog.collection_todos || [], catalog.warnings || []);
+}
+
+function renderSourceHealth(catalog) {
+  const summary = catalog.summary || state.summary?.sourceSummary;
+  if (!summary) {
+    elements.sourceHealth.innerHTML = createEmptyState("No source health", "Summary metrics were not found in the source manifest.");
+    return;
+  }
+
+  elements.sourceHealth.innerHTML = `
+    <article class="metric-card">
+      <h3>Active sources</h3>
+      <strong>${summary.active_source_count || summary.total || 0}</strong>
+      <small>Tracked automated feeds and direct official pages</small>
+    </article>
+    <article class="metric-card">
+      <h3>Healthy this run</h3>
+      <strong>${summary.successful_source_count || summary.successful || 0}</strong>
+      <small>Sources that returned usable data during the latest refresh</small>
+    </article>
+    <article class="metric-card">
+      <h3>Needs attention</h3>
+      <strong>${summary.failed_source_count || summary.failed || 0}</strong>
+      <small>Sources that returned errors or need maintenance</small>
+    </article>
+    <article class="metric-card">
+      <h3>Backlog</h3>
+      <strong>${summary.backlog_count || summary.backlog || 0}</strong>
+      <small>Approved next-source candidates for future coverage</small>
+    </article>
+  `;
+}
+
+function renderCoverageBacklog(backlog) {
+  if (!backlog.length) {
+    elements.coverageBacklog.innerHTML = createEmptyState("No backlog", "There are no source-expansion candidates yet.");
+    return;
+  }
+
+  elements.coverageBacklog.innerHTML = `
+    <p class="section-kicker">Coverage roadmap</p>
+    <h3>Next official sources</h3>
+    <div class="backlog-list">
+      ${backlog.slice(0, 6).map((item) => `
+        <article class="roadmap-item">
+          <div class="roadmap-head">
+            <strong>${escapeHtml(item.company)}</strong>
+            <span class="priority-pill">${escapeHtml(item.priority || "Planned")}</span>
+          </div>
+          <p>${escapeHtml(item.status || "")}</p>
+          <p class="roadmap-note">${escapeHtml(item.notes || "")}</p>
+        </article>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderCollectionTodos(todos, warnings) {
+  const todoItems = [...todos];
+  if (warnings.length) {
+    todoItems.unshift(`Latest refresh warnings: ${warnings.length}. Review source cards for affected feeds.`);
+  }
+
+  if (!todoItems.length) {
+    elements.collectionTodos.innerHTML = createEmptyState("No collection TODOs", "No collection tasks are currently listed.");
+    return;
+  }
+
+  elements.collectionTodos.innerHTML = `
+    <p class="section-kicker">Collection TODOs</p>
+    <h3>What to improve next</h3>
+    <ol class="todo-list">
+      ${todoItems.slice(0, 6).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+    </ol>
+  `;
 }
 
 function populateSelect(select, options) {
   select.innerHTML = ["<option value=\"\">All</option>"]
     .concat(options.map((value) => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`))
     .join("");
+}
+
+function renderQuickFilters() {
+  const topSkills = state.summary?.skillIndex?.slice(0, 6) || [];
+  elements.quickFilters.innerHTML = topSkills
+    .map((skill) => `
+      <button class="quick-filter ${state.quickSkill === skill.label ? "is-active" : ""}" type="button" data-skill="${escapeHtml(skill.label)}">
+        ${escapeHtml(skill.label)}
+      </button>
+    `)
+    .join("");
+
+  elements.quickFilters.querySelectorAll("[data-skill]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const selectedSkill = button.dataset.skill || "";
+      state.quickSkill = state.quickSkill === selectedSkill ? "" : selectedSkill;
+      state.skillFilter = state.quickSkill;
+      elements.skillFilter.value = state.quickSkill;
+      renderQuickFilters();
+      renderJobs();
+    });
+  });
 }
 
 function renderJobs() {
@@ -623,7 +804,7 @@ function renderJobs() {
 }
 
 function getFilteredJobs() {
-  return state.jobs.filter((job) => {
+  const filtered = state.jobs.filter((job) => {
     const haystack = [
       job.company,
       job.title,
@@ -640,6 +821,33 @@ function getFilteredJobs() {
       && (!state.modeFilter || job.workMode === state.modeFilter)
       && (!state.skillFilter || job.skillTags.includes(state.skillFilter));
   });
+
+  return filtered.sort((left, right) => {
+    if (state.sortFilter === "company") {
+      return left.company.localeCompare(right.company) || left.title.localeCompare(right.title);
+    }
+    if (state.sortFilter === "role") {
+      return left.roleFamily.localeCompare(right.roleFamily) || left.company.localeCompare(right.company);
+    }
+    if (state.sortFilter === "location") {
+      return left.location.localeCompare(right.location) || left.company.localeCompare(right.company);
+    }
+    return scoreJob(right) - scoreJob(left) || left.company.localeCompare(right.company) || left.title.localeCompare(right.title);
+  });
+}
+
+function scoreJob(job) {
+  let score = 0;
+  if (state.searchTerm) {
+    const search = state.searchTerm.toLowerCase();
+    if (job.title.toLowerCase().includes(search)) score += 5;
+    if (job.company.toLowerCase().includes(search)) score += 3;
+    if (job.focusArea.toLowerCase().includes(search)) score += 2;
+    score += job.skillTags.filter((tag) => tag.toLowerCase().includes(search)).length * 2;
+  }
+  if (state.skillFilter && job.skillTags.includes(state.skillFilter)) score += 4;
+  if (job.roleFamily === "Bioinformatics Analyst") score += 1;
+  return score;
 }
 
 function uniqueValues(values) {
@@ -679,6 +887,13 @@ function formatDelta(value) {
   return value > 0 ? `+${value}` : String(value);
 }
 
+function formatSourceStatus(status) {
+  if (status === "ok") return "Healthy";
+  if (status === "error") return "Error";
+  if (status === "empty") return "No roles";
+  return "Unknown";
+}
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -687,4 +902,3 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
 }
-

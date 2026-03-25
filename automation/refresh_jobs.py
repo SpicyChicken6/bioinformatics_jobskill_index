@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 from __future__ import annotations
 
 import csv
@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from html.parser import HTMLParser
 from pathlib import Path
-from typing import Iterable
+from typing import Any, Iterable
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
@@ -19,6 +19,7 @@ from zoneinfo import ZoneInfo
 BASE_DIR = Path(__file__).resolve().parents[1]
 OUTPUT_DIR = BASE_DIR / "output"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+SOURCE_REGISTRY = BASE_DIR / "automation" / "source_registry.json"
 
 JOBS_CSV = OUTPUT_DIR / "bioinformatics-jobs-board.csv"
 JOBS_MD = OUTPUT_DIR / "bioinformatics-jobs-board.md"
@@ -165,6 +166,58 @@ DIRECT_HTML_SOURCES = [
     },
 ]
 
+DEFAULT_SOURCE_REGISTRY: dict[str, Any] = {
+    "active_sources": {
+        "greenhouse": GREENHOUSE_SOURCES,
+        "lever": LEVER_SOURCES,
+        "direct_html": DIRECT_HTML_SOURCES,
+    },
+    "expansion_backlog": [
+        {
+            "company": "Tempus",
+            "priority": "High",
+            "status": "Research official ATS endpoint",
+            "notes": "Add only after verifying an official company-hosted board or ATS API path.",
+        },
+        {
+            "company": "Guardant Health",
+            "priority": "High",
+            "status": "Research official ATS endpoint",
+            "notes": "Important commercial genomics employer with analyst-adjacent demand signals.",
+        },
+        {
+            "company": "10x Genomics",
+            "priority": "Medium",
+            "status": "Research official ATS endpoint",
+            "notes": "Useful for single-cell and platform-oriented skill signals.",
+        },
+        {
+            "company": "Freenome",
+            "priority": "Medium",
+            "status": "Research official ATS endpoint",
+            "notes": "Likely to strengthen translational and biomarker coverage.",
+        },
+        {
+            "company": "insitro",
+            "priority": "Medium",
+            "status": "Research official ATS endpoint",
+            "notes": "Potential ML and platform-bioinformatics signal expansion.",
+        },
+        {
+            "company": "Arc Institute",
+            "priority": "Medium",
+            "status": "Research official ATS endpoint",
+            "notes": "Could add more research-heavy computational biology roles.",
+        },
+    ],
+    "collection_todos": [
+        "Prioritize official ATS feeds that expose posted or updated timestamps so the board can enforce a last-365-days window.",
+        "Track source-level success and failure notes in the output manifest so the dashboard can show collection health each week.",
+        "Keep LinkedIn out of CI ingestion unless approved LinkedIn partner access is available; use official company career endpoints instead.",
+        "Review the backlog quarterly and promote verified official sources into the active automated set.",
+    ],
+}
+
 
 @dataclass
 class JobRecord:
@@ -178,6 +231,17 @@ class JobRecord:
     requirements: list[str]
     skill_tags: list[str]
     source_url: str
+
+
+@dataclass
+class SourceReport:
+    company: str
+    source_type: str
+    endpoint_url: str
+    browse_url: str
+    status: str
+    jobs_found: int
+    notes: str = ""
 
 
 class StructuredHTMLParser(HTMLParser):
@@ -230,35 +294,111 @@ def main() -> int:
     warnings: list[str] = []
     jobs: list[JobRecord] = []
 
-    for source in GREENHOUSE_SOURCES:
-        try:
-            jobs.extend(fetch_greenhouse_jobs(source))
-        except Exception as exc:  # noqa: BLE001
-            warnings.append(f"Greenhouse source '{source['board_token']}' failed: {exc}")
+    source_registry = load_source_registry()
+    source_reports: list[SourceReport] = []
 
-    for source in LEVER_SOURCES:
-        try:
-            jobs.extend(fetch_lever_jobs(source))
-        except Exception as exc:  # noqa: BLE001
-            warnings.append(f"Lever source '{source['site']}' failed: {exc}")
+    greenhouse_sources = source_registry["active_sources"]["greenhouse"]
+    lever_sources = source_registry["active_sources"]["lever"]
+    direct_html_sources = source_registry["active_sources"]["direct_html"]
 
-    for source in DIRECT_HTML_SOURCES:
+    for source in greenhouse_sources:
+        try:
+            fetched_jobs = fetch_greenhouse_jobs(source)
+            jobs.extend(fetched_jobs)
+            source_reports.append(
+                build_source_report(
+                    source=source,
+                    source_type="Greenhouse API",
+                    endpoint_url=f"https://boards-api.greenhouse.io/v1/boards/{source['board_token']}/jobs?content=true",
+                    browse_url=f"https://boards.greenhouse.io/{source['board_token']}",
+                    jobs_found=len(fetched_jobs),
+                    status="ok",
+                )
+            )
+        except Exception as exc:  # noqa: BLE001
+            message = f"Greenhouse source '{source['board_token']}' failed: {exc}"
+            warnings.append(message)
+            source_reports.append(
+                build_source_report(
+                    source=source,
+                    source_type="Greenhouse API",
+                    endpoint_url=f"https://boards-api.greenhouse.io/v1/boards/{source['board_token']}/jobs?content=true",
+                    browse_url=f"https://boards.greenhouse.io/{source['board_token']}",
+                    status="error",
+                    notes=str(exc),
+                )
+            )
+
+    for source in lever_sources:
+        try:
+            fetched_jobs = fetch_lever_jobs(source)
+            jobs.extend(fetched_jobs)
+            source_reports.append(
+                build_source_report(
+                    source=source,
+                    source_type="Lever API",
+                    endpoint_url=f"https://api.lever.co/v0/postings/{source['site']}?mode=json",
+                    browse_url=f"https://jobs.lever.co/{source['site']}",
+                    jobs_found=len(fetched_jobs),
+                    status="ok",
+                )
+            )
+        except Exception as exc:  # noqa: BLE001
+            message = f"Lever source '{source['site']}' failed: {exc}"
+            warnings.append(message)
+            source_reports.append(
+                build_source_report(
+                    source=source,
+                    source_type="Lever API",
+                    endpoint_url=f"https://api.lever.co/v0/postings/{source['site']}?mode=json",
+                    browse_url=f"https://jobs.lever.co/{source['site']}",
+                    status="error",
+                    notes=str(exc),
+                )
+            )
+
+    for source in direct_html_sources:
         try:
             job = fetch_direct_html_job(source)
             if job:
                 jobs.append(job)
+            source_reports.append(
+                build_source_report(
+                    source=source,
+                    source_type="Direct official careers page",
+                    endpoint_url=source["url"],
+                    browse_url=source["url"],
+                    jobs_found=1 if job else 0,
+                    status="ok" if job else "empty",
+                )
+            )
         except Exception as exc:  # noqa: BLE001
-            warnings.append(f"Direct source '{source['url']}' failed: {exc}")
+            message = f"Direct source '{source['url']}' failed: {exc}"
+            warnings.append(message)
+            source_reports.append(
+                build_source_report(
+                    source=source,
+                    source_type="Direct official careers page",
+                    endpoint_url=source["url"],
+                    browse_url=source["url"],
+                    status="error",
+                    notes=str(exc),
+                )
+            )
 
     jobs = dedupe_jobs(sort_jobs(jobs))
     if not jobs:
-        raise SystemExit("No jobs were collected; refusing to overwrite outputs with an empty dataset.")
+        jobs = read_jobs_csv()
+        if jobs:
+            warnings.append("No live jobs were fetched during this run; reusing the existing jobs-board CSV as a cache fallback.")
+        else:
+            raise SystemExit("No jobs were collected and no cached jobs-board CSV was available.")
 
     write_jobs_csv(jobs)
     write_jobs_markdown(jobs)
     write_trends_markdown(jobs, warnings)
     write_history_csv(jobs)
-    write_sources_json()
+    write_sources_json(source_registry, source_reports, warnings)
 
     print(f"Wrote {len(jobs)} jobs for snapshot {SNAPSHOT_DATE}.")
     if warnings:
@@ -377,48 +517,79 @@ def fetch_text(url: str) -> str:
 def fetch_json(url: str) -> dict | list:
     return json.loads(fetch_text(url))
 
-def write_sources_json() -> None:
-    SOURCES_JSON.write_text(json.dumps(build_source_catalog(), indent=2) + "\n", encoding="utf-8")
+def write_sources_json(source_registry: dict[str, Any], source_reports: list[SourceReport], warnings: list[str]) -> None:
+    SOURCES_JSON.write_text(
+        json.dumps(build_source_catalog(source_registry, source_reports, warnings), indent=2) + "\n",
+        encoding="utf-8",
+    )
 
 
-def build_source_catalog() -> dict[str, object]:
+def build_source_catalog(
+    source_registry: dict[str, Any],
+    source_reports: list[SourceReport],
+    warnings: list[str],
+) -> dict[str, object]:
     automated_sources: list[dict[str, str]] = []
+    source_report_map = {(report.company, report.endpoint_url): report for report in source_reports}
 
-    for source in GREENHOUSE_SOURCES:
+    for source in source_registry["active_sources"]["greenhouse"]:
         board_token = source["board_token"]
+        endpoint_url = f"https://boards-api.greenhouse.io/v1/boards/{board_token}/jobs?content=true"
+        report = source_report_map.get((source["company"], endpoint_url))
         automated_sources.append(
-            {
-                "type": "Greenhouse API",
-                "company": source["company"],
-                "endpoint_url": f"https://boards-api.greenhouse.io/v1/boards/{board_token}/jobs?content=true",
-                "browse_url": f"https://boards.greenhouse.io/{board_token}",
-            }
+            build_source_manifest_entry(
+                company=source["company"],
+                source_type="Greenhouse API",
+                endpoint_url=endpoint_url,
+                browse_url=f"https://boards.greenhouse.io/{board_token}",
+                report=report,
+            )
         )
 
-    for source in LEVER_SOURCES:
+    for source in source_registry["active_sources"]["lever"]:
         site = source["site"]
+        endpoint_url = f"https://api.lever.co/v0/postings/{site}?mode=json"
+        report = source_report_map.get((source["company"], endpoint_url))
         automated_sources.append(
-            {
-                "type": "Lever API",
-                "company": source["company"],
-                "endpoint_url": f"https://api.lever.co/v0/postings/{site}?mode=json",
-                "browse_url": f"https://jobs.lever.co/{site}",
-            }
+            build_source_manifest_entry(
+                company=source["company"],
+                source_type="Lever API",
+                endpoint_url=endpoint_url,
+                browse_url=f"https://jobs.lever.co/{site}",
+                report=report,
+            )
         )
 
-    for source in DIRECT_HTML_SOURCES:
+    for source in source_registry["active_sources"]["direct_html"]:
+        endpoint_url = source["url"]
+        report = source_report_map.get((source["company"], endpoint_url))
         automated_sources.append(
-            {
-                "type": "Direct official careers page",
-                "company": source["company"],
-                "endpoint_url": source["url"],
-                "browse_url": source["url"],
-            }
+            build_source_manifest_entry(
+                company=source["company"],
+                source_type="Direct official careers page",
+                endpoint_url=endpoint_url,
+                browse_url=source["url"],
+                report=report,
+            )
         )
+
+    successful_sources = sum(1 for report in source_reports if report.status == "ok")
+    failed_sources = sum(1 for report in source_reports if report.status == "error")
 
     return {
         "snapshot_date": SNAPSHOT_DATE,
+        "summary": {
+            "active_source_count": len(automated_sources),
+            "successful_source_count": successful_sources,
+            "failed_source_count": failed_sources,
+            "warning_count": len(warnings),
+            "backlog_count": len(source_registry.get("expansion_backlog", [])),
+            "todo_count": len(source_registry.get("collection_todos", [])),
+        },
         "automated_sources": automated_sources,
+        "expansion_backlog": source_registry.get("expansion_backlog", []),
+        "collection_todos": source_registry.get("collection_todos", []),
+        "warnings": warnings,
         "linkedin": {
             "automated_tracking": False,
             "status": "Not included in CI ingestion",
@@ -619,6 +790,89 @@ def dedupe_jobs(jobs: list[JobRecord]) -> list[JobRecord]:
     return deduped
 
 
+def load_source_registry() -> dict[str, Any]:
+    if SOURCE_REGISTRY.exists():
+        registry = json.loads(SOURCE_REGISTRY.read_text(encoding="utf-8"))
+    else:
+        registry = DEFAULT_SOURCE_REGISTRY
+        SOURCE_REGISTRY.write_text(json.dumps(DEFAULT_SOURCE_REGISTRY, indent=2) + "\n", encoding="utf-8")
+    active_sources = registry.setdefault("active_sources", {})
+    active_sources.setdefault("greenhouse", GREENHOUSE_SOURCES)
+    active_sources.setdefault("lever", LEVER_SOURCES)
+    active_sources.setdefault("direct_html", DIRECT_HTML_SOURCES)
+    registry.setdefault("expansion_backlog", [])
+    registry.setdefault("collection_todos", [])
+    return registry
+
+
+def build_source_report(
+    source: dict[str, str],
+    source_type: str,
+    endpoint_url: str,
+    browse_url: str,
+    status: str,
+    jobs_found: int = 0,
+    notes: str = "",
+) -> SourceReport:
+    return SourceReport(
+        company=source["company"],
+        source_type=source_type,
+        endpoint_url=endpoint_url,
+        browse_url=browse_url,
+        status=status,
+        jobs_found=jobs_found,
+        notes=notes,
+    )
+
+
+def build_source_manifest_entry(
+    company: str,
+    source_type: str,
+    endpoint_url: str,
+    browse_url: str,
+    report: SourceReport | None,
+) -> dict[str, object]:
+    return {
+        "type": source_type,
+        "company": company,
+        "endpoint_url": endpoint_url,
+        "browse_url": browse_url,
+        "status": report.status if report else "not_run",
+        "jobs_found": report.jobs_found if report else 0,
+        "notes": report.notes if report else "",
+    }
+
+
+def read_jobs_csv() -> list[JobRecord]:
+    if not JOBS_CSV.exists():
+        return []
+    with JOBS_CSV.open("r", newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        jobs: list[JobRecord] = []
+        for row in reader:
+            if not row.get("Company") or not row.get("Title"):
+                continue
+            jobs.append(
+                JobRecord(
+                    company=row["Company"].strip(),
+                    title=row["Title"].strip(),
+                    role_family=row.get("RoleFamily", "").strip(),
+                    focus_area=row.get("FocusArea", "").strip(),
+                    location=row.get("Location", "").strip(),
+                    work_mode=row.get("WorkMode", "").strip(),
+                    responsibilities=split_csv_list(row.get("Responsibilities", "")),
+                    requirements=split_csv_list(row.get("Requirements", "")),
+                    skill_tags=split_csv_list(row.get("KeySkills", "")),
+                    source_url=row.get("SourceUrl", "").strip(),
+                )
+            )
+    return jobs
+
+
+def split_csv_list(value: str) -> list[str]:
+    return [item.strip() for item in str(value).split(";") if item.strip()]
+
+
 def write_jobs_csv(jobs: list[JobRecord]) -> None:
     with JOBS_CSV.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.writer(handle)
@@ -785,4 +1039,3 @@ if __name__ == "__main__":
     except URLError as exc:
         print(f"Network error: {exc}", file=sys.stderr)
         raise
-
