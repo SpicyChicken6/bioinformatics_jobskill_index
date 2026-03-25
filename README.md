@@ -54,3 +54,12 @@ python -m http.server 4173
 ```
 
 Then open `http://127.0.0.1:4173/`.
+
+## Validation checks
+Run these checks before opening or updating a PR:
+
+```bash
+python -m unittest -v tests/test_refresh_jobs.py
+python -m py_compile automation/refresh_jobs.py
+node --check assets/app.js
+```
