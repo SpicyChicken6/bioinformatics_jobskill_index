@@ -1,5 +1,5 @@
 {
-  "snapshot_date": "2026-03-23",
+  "snapshot_date": "2026-03-30",
   "summary": {
     "active_source_count": 11,
     "successful_source_count": 9,
@@ -33,7 +33,7 @@
       "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/recursionpharmaceuticals/jobs?content=true",
       "browse_url": "https://boards.greenhouse.io/recursionpharmaceuticals",
       "status": "ok",
-      "jobs_found": 3,
+      "jobs_found": 2,
       "notes": ""
     },
     {

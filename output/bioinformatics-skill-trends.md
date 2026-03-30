@@ -1,7 +1,7 @@
 # Bioinformatics Skill Trends
 
-Snapshot date: 2026-03-23  
-Verified live roles: 15  
+Snapshot date: 2026-03-30  
+Verified live roles: 14  
 Unique companies: 8
 
 ## Method
@@ -11,41 +11,41 @@ Unique companies: 8
 
 ## Role mix
 - Bioinformatics Scientist: 6
-- Computational Biologist: 6
+- Computational Biologist: 5
 - Bioinformatics Analyst: 2
 - Bioinformatics Engineer: 1
 
 ## Work-mode mix
-- Hybrid: 7
+- Hybrid: 6
 - Remote: 5
 - On-site: 3
 
 ## Top skill index
-- Cancer / liquid biopsy / biomarkers: 5/15 roles (33.3%)
-- NGS / genomics: 5/15 roles (33.3%)
-- Machine learning / AI: 4/15 roles (26.7%)
-- Cross-functional collaboration: 3/15 roles (20.0%)
-- Customer-facing / platform migration: 3/15 roles (20.0%)
-- Data visualization / reporting: 3/15 roles (20.0%)
-- Experimental design / assay partnership: 3/15 roles (20.0%)
-- Multi-omics integration: 3/15 roles (20.0%)
-- Pipelines / workflow orchestration: 3/15 roles (20.0%)
-- Python: 3/15 roles (20.0%)
-- Scientific writing / communication: 3/15 roles (20.0%)
-- Clinical / translational applications: 2/15 roles (13.3%)
-- Cloud / scalable compute: 2/15 roles (13.3%)
-- Single-cell / multi-omics: 2/15 roles (13.3%)
-- Containers / CI-CD / production: 1/15 roles (6.7%)
-- Linux / Unix: 1/15 roles (6.7%)
-- Software engineering / reproducibility: 1/15 roles (6.7%)
-- Statistics / modeling: 1/15 roles (6.7%)
+- NGS / genomics: 5/14 roles (35.7%)
+- Cancer / liquid biopsy / biomarkers: 4/14 roles (28.6%)
+- Machine learning / AI: 4/14 roles (28.6%)
+- Cross-functional collaboration: 3/14 roles (21.4%)
+- Customer-facing / platform migration: 3/14 roles (21.4%)
+- Data visualization / reporting: 3/14 roles (21.4%)
+- Experimental design / assay partnership: 3/14 roles (21.4%)
+- Multi-omics integration: 3/14 roles (21.4%)
+- Pipelines / workflow orchestration: 3/14 roles (21.4%)
+- Python: 3/14 roles (21.4%)
+- Scientific writing / communication: 3/14 roles (21.4%)
+- Cloud / scalable compute: 2/14 roles (14.3%)
+- Single-cell / multi-omics: 2/14 roles (14.3%)
+- Clinical / translational applications: 1/14 roles (7.1%)
+- Containers / CI-CD / production: 1/14 roles (7.1%)
+- Linux / Unix: 1/14 roles (7.1%)
+- Software engineering / reproducibility: 1/14 roles (7.1%)
+- Statistics / modeling: 1/14 roles (7.1%)
 
 ## What is trending
-- Python appears in 3/15 live roles and remains the baseline programming skill.
-- Pipeline or workflow work appears in 3/15 roles, which keeps production-oriented bioinformatics central to the market.
-- Oncology or biomarker-oriented work appears in 5/15 roles in this snapshot.
-- Cloud appears in 2/15 roles and ML or AI appears in 4/15 roles.
-- Explicit workflow engines such as Nextflow, WDL, or Snakemake appear in 0/15 roles.
+- Python appears in 3/14 live roles and remains the baseline programming skill.
+- Pipeline or workflow work appears in 3/14 roles, which keeps production-oriented bioinformatics central to the market.
+- Oncology or biomarker-oriented work appears in 4/14 roles in this snapshot.
+- Cloud appears in 2/14 roles and ML or AI appears in 4/14 roles.
+- Explicit workflow engines such as Nextflow, WDL, or Snakemake appear in 0/14 roles.
 
 ## Source notes
 - Greenhouse source 'latchbio' failed: HTTP Error 404: Not Found
