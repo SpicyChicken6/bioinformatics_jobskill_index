@@ -1,7 +1,7 @@
 # Bioinformatics Jobs Board
 
-Snapshot date: 2026-03-30  
-Verified live roles: 14  
+Snapshot date: 2026-04-06  
+Verified live roles: 12  
 Unique companies: 8
 
 This board is regenerated from public company job-board endpoints and direct official job pages. The snapshot date is the date of retrieval in America/Chicago.
@@ -13,8 +13,6 @@ This board is regenerated from public company job-board endpoints and direct off
 | GATC Health | Bioinformatics Analyst | Bioinformatics Analyst | Aging, single-cell, and target discovery | Morgantown, WV | Remote | Prep and Process data through GATC platform based on customer or internal end user requirements.; Implement primary and secondary analysis tools for GATC’s assays.; Work with cross-disciplinary R&D teams to develop and implement new discovery and risk assessment product applications. | Degree in computational biology, bioinformatics, computer science or similar.; Experience analyzing complex multi-omic datasets, including human or single cell data.; Experience implementing, and evaluating novel bioinformatics algorithms and pipelines. | Python, NGS / genomics, Pipelines / workflow orchestration, Single-cell / multi-omics, Cross-functional collaboration, Scientific writing / communication, Experimental design / assay partnership, Cloud / scalable compute, Machine learning / AI, Data visualization / reporting, Multi-omics integration, Customer-facing / platform migration | [Source](https://jobs.lever.co/gatchealth/ea7aed95-4be3-4649-b817-01e7c9a3a320) |
 | Natera | Lead Bioinformatics Scientist (Oncology Product Development) | Bioinformatics Scientist | Oncology assay and algorithm development | US Remote | Remote |  |  | Cancer / liquid biopsy / biomarkers | [Source](https://job-boards.greenhouse.io/natera/jobs/5805823004) |
 | Natera | Lead Machine Learning and Bioinformatics Scientist | Bioinformatics Scientist | General bioinformatics and computational biology | San Carlos, CA | Hybrid |  |  | Machine learning / AI | [Source](https://job-boards.greenhouse.io/natera/jobs/5779892004) |
-| Natera | Senior Bioinformatics Engineer | Bioinformatics Engineer | Production pipeline engineering for molecular diagnostics | US Remote | Remote |  |  |  | [Source](https://job-boards.greenhouse.io/natera/jobs/5805825004) |
-| Natera | Senior Bioinformatics Scientist (Oncology Product Development) | Bioinformatics Scientist | Oncology assay and algorithm development | US Remote | Remote |  |  | Cancer / liquid biopsy / biomarkers | [Source](https://job-boards.greenhouse.io/natera/jobs/5802950004) |
 | Neptune Bio | Computational Biologist | Computational Biologist | General bioinformatics and computational biology | New York | On-site |  |  |  | [Source](https://job-boards.greenhouse.io/neptunebio/jobs/4969002007) |
 | NewLimit | Computational Biologist | Computational Biologist | General bioinformatics and computational biology | South San Francisco, CA | On-site |  |  |  | [Source](https://job-boards.greenhouse.io/newlimit/jobs/5819398004) |
 | Personalis | Sr. Bioinformatics Scientist – cfDNA Technology Development | Bioinformatics Scientist | cfDNA assay R&D and product translation | Fremont, CA | Hybrid |  |  | NGS / genomics, Cancer / liquid biopsy / biomarkers | [Source](https://job-boards.greenhouse.io/personalisinc/jobs/7595015003) |
