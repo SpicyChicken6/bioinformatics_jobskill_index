@@ -1,5 +1,5 @@
 {
-  "snapshot_date": "2026-04-20",
+  "snapshot_date": "2026-04-27",
   "summary": {
     "active_source_count": 11,
     "successful_source_count": 8,
@@ -60,7 +60,7 @@
       "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/natera/jobs?content=true",
       "browse_url": "https://boards.greenhouse.io/natera",
       "status": "ok",
-      "jobs_found": 1,
+      "jobs_found": 0,
       "notes": ""
     },
     {
