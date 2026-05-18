@@ -1,6 +1,6 @@
 # Bioinformatics Skill Trends
 
-Snapshot date: 2026-05-11  
+Snapshot date: 2026-05-18  
 Verified live roles: 9  
 Unique companies: 6
 
