@@ -1,7 +1,7 @@
 # Bioinformatics Skill Trends
 
-Snapshot date: 2026-05-18  
-Verified live roles: 9  
+Snapshot date: 2026-05-25  
+Verified live roles: 10  
 Unique companies: 6
 
 ## Method
@@ -12,34 +12,33 @@ Unique companies: 6
 ## Role mix
 - Computational Biologist: 5
 - Bioinformatics Scientist: 3
-- Bioinformatics Analyst: 1
+- Bioinformatics Analyst: 2
 
 ## Work-mode mix
 - Hybrid: 6
 - On-site: 2
-- Remote: 1
+- Remote: 2
 
 ## Top skill index
-- NGS / genomics: 3/9 roles (33.3%)
-- Cancer / liquid biopsy / biomarkers: 1/9 roles (11.1%)
-- Cloud / scalable compute: 1/9 roles (11.1%)
-- Cross-functional collaboration: 1/9 roles (11.1%)
-- Customer-facing / platform migration: 1/9 roles (11.1%)
-- Data visualization / reporting: 1/9 roles (11.1%)
-- Experimental design / assay partnership: 1/9 roles (11.1%)
-- Machine learning / AI: 1/9 roles (11.1%)
-- Multi-omics integration: 1/9 roles (11.1%)
-- Pipelines / workflow orchestration: 1/9 roles (11.1%)
-- Python: 1/9 roles (11.1%)
-- Scientific writing / communication: 1/9 roles (11.1%)
-- Single-cell / multi-omics: 1/9 roles (11.1%)
+- Machine learning / AI: 3/10 roles (30.0%)
+- NGS / genomics: 3/10 roles (30.0%)
+- Cloud / scalable compute: 2/10 roles (20.0%)
+- Cross-functional collaboration: 2/10 roles (20.0%)
+- Customer-facing / platform migration: 2/10 roles (20.0%)
+- Data visualization / reporting: 2/10 roles (20.0%)
+- Experimental design / assay partnership: 2/10 roles (20.0%)
+- Multi-omics integration: 2/10 roles (20.0%)
+- Pipelines / workflow orchestration: 2/10 roles (20.0%)
+- Python: 2/10 roles (20.0%)
+- Scientific writing / communication: 2/10 roles (20.0%)
+- Single-cell / multi-omics: 2/10 roles (20.0%)
 
 ## What is trending
-- Python appears in 1/9 live roles and remains the baseline programming skill.
-- Pipeline or workflow work appears in 1/9 roles, which keeps production-oriented bioinformatics central to the market.
-- Oncology or biomarker-oriented work appears in 1/9 roles in this snapshot.
-- Cloud appears in 1/9 roles and ML or AI appears in 1/9 roles.
-- Explicit workflow engines such as Nextflow, WDL, or Snakemake appear in 0/9 roles.
+- Python appears in 2/10 live roles and remains the baseline programming skill.
+- Pipeline or workflow work appears in 2/10 roles, which keeps production-oriented bioinformatics central to the market.
+- Oncology or biomarker-oriented work appears in 0/10 roles in this snapshot.
+- Cloud appears in 2/10 roles and ML or AI appears in 3/10 roles.
+- Explicit workflow engines such as Nextflow, WDL, or Snakemake appear in 0/10 roles.
 
 ## Source notes
 - Greenhouse source 'latchbio' failed: HTTP Error 404: Not Found

@@ -1,5 +1,5 @@
 {
-  "snapshot_date": "2026-05-18",
+  "snapshot_date": "2026-05-25",
   "summary": {
     "active_source_count": 11,
     "successful_source_count": 8,
@@ -87,7 +87,7 @@
       "endpoint_url": "https://api.lever.co/v0/postings/gatchealth?mode=json",
       "browse_url": "https://jobs.lever.co/gatchealth",
       "status": "ok",
-      "jobs_found": 1,
+      "jobs_found": 2,
       "notes": ""
     },
     {
