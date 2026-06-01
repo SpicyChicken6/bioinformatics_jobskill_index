@@ -1,7 +1,7 @@
 # Bioinformatics Jobs Board
 
-Snapshot date: 2026-05-25  
-Verified live roles: 10  
+Snapshot date: 2026-06-01  
+Verified live roles: 9  
 Unique companies: 6
 
 This board is regenerated from public company job-board endpoints and direct official job pages. The snapshot date is the date of retrieval in America/Chicago.
@@ -17,4 +17,3 @@ This board is regenerated from public company job-board endpoints and direct off
 | Profluent | Lead Bioinformatics Scientist, NGS | Bioinformatics Scientist | General bioinformatics and computational biology | Emeryville, California, United States; Hybrid (2-3 days on-site) | Hybrid |  |  | NGS / genomics | [Source](https://job-boards.greenhouse.io/profluent/jobs/4983485008) |
 | Recursion | Associate Principal Computational Biologist, Neuroscience | Computational Biologist | General bioinformatics and computational biology | New York, New York; Salt Lake City, Utah | Hybrid |  |  |  | [Source](https://job-boards.greenhouse.io/recursionpharmaceuticals/jobs/7583094) |
 | Recursion | Senior Computational Biologist – Target ID | Computational Biologist | General bioinformatics and computational biology | New York, New York; Salt Lake City, Utah | Hybrid |  |  |  | [Source](https://job-boards.greenhouse.io/recursionpharmaceuticals/jobs/7739306) |
-| Recursion | Senior Computational Biologist, Tooling | Computational Biologist | General bioinformatics and computational biology | London, England | Hybrid |  |  |  | [Source](https://job-boards.greenhouse.io/recursionpharmaceuticals/jobs/7872393) |
