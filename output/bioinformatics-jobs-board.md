@@ -1,7 +1,7 @@
 # Bioinformatics Jobs Board
 
-Snapshot date: 2026-06-08  
-Verified live roles: 9  
+Snapshot date: 2026-06-15  
+Verified live roles: 8  
 Unique companies: 6
 
 This board is regenerated from public company job-board endpoints and direct official job pages. The snapshot date is the date of retrieval in America/Chicago.
@@ -16,4 +16,3 @@ This board is regenerated from public company job-board endpoints and direct off
 | Personalis | Sr. Bioinformatics Scientist – Novel Cell Free DNA Applications | Bioinformatics Scientist | New cfDNA product opportunities | Fremont, CA | Hybrid |  |  |  | [Source](https://job-boards.greenhouse.io/personalisinc/jobs/7617458003) |
 | Profluent | Lead Bioinformatics Scientist, NGS | Bioinformatics Scientist | General bioinformatics and computational biology | Emeryville, California, United States; Hybrid (2-3 days on-site) | Hybrid |  |  | NGS / genomics | [Source](https://job-boards.greenhouse.io/profluent/jobs/4983485008) |
 | Recursion | Associate Principal Computational Biologist, Neuroscience | Computational Biologist | General bioinformatics and computational biology | New York, New York; Salt Lake City, Utah | Hybrid |  |  |  | [Source](https://job-boards.greenhouse.io/recursionpharmaceuticals/jobs/7583094) |
-| Recursion | Senior Computational Biologist – Target ID | Computational Biologist | General bioinformatics and computational biology | New York, New York; Salt Lake City, Utah | Hybrid |  |  |  | [Source](https://job-boards.greenhouse.io/recursionpharmaceuticals/jobs/7739306) |
