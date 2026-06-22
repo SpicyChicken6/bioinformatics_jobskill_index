@@ -1,8 +1,8 @@
 # Bioinformatics Jobs Board
 
-Snapshot date: 2026-06-15  
-Verified live roles: 8  
-Unique companies: 6
+Snapshot date: 2026-06-22  
+Verified live roles: 10  
+Unique companies: 7
 
 This board is regenerated from public company job-board endpoints and direct official job pages. The snapshot date is the date of retrieval in America/Chicago.
 
@@ -10,6 +10,8 @@ This board is regenerated from public company job-board endpoints and direct off
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | GATC Health | Bioinformatics Analyst - CA | Bioinformatics Analyst | Aging, single-cell, and target discovery | Irvine, CA | Remote | Prep and Process data through GATC platform based on customer or internal end user requirements.; Implement primary and secondary analysis tools for GATC’s assays.; Work with cross-disciplinary R&D teams to develop and implement new discovery and risk assessment product applications. | Degree in computational biology, bioinformatics, computer science or similar.; Experience analyzing complex multi-omic datasets, including human or single cell data.; Experience implementing, and evaluating novel bioinformatics algorithms and pipelines. | Python, NGS / genomics, Pipelines / workflow orchestration, Single-cell / multi-omics, Cross-functional collaboration, Scientific writing / communication, Experimental design / assay partnership, Cloud / scalable compute, Machine learning / AI, Data visualization / reporting, Multi-omics integration, Customer-facing / platform migration | [Source](https://jobs.lever.co/gatchealth/e418c8d5-2eae-4a08-bef3-830f495b0bc8) |
 | GATC Health | Bioinformatics Analyst - UT | Bioinformatics Analyst | Aging, single-cell, and target discovery | Salt Lake City, UT | Remote | Prep and Process data through GATC platform based on customer or internal end user requirements.; Implement primary and secondary analysis tools for GATC’s assays.; Work with cross-disciplinary R&D teams to develop and implement new discovery and risk assessment product applications. | Degree in computational biology, bioinformatics, computer science or similar.; Experience analyzing complex multi-omic datasets, including human or single cell data.; Experience implementing, and evaluating novel bioinformatics algorithms and pipelines. | Python, NGS / genomics, Pipelines / workflow orchestration, Single-cell / multi-omics, Cross-functional collaboration, Scientific writing / communication, Experimental design / assay partnership, Cloud / scalable compute, Machine learning / AI, Data visualization / reporting, Multi-omics integration, Customer-facing / platform migration | [Source](https://jobs.lever.co/gatchealth/a1eea9b2-db8a-42c5-9e0d-033a467a08a1) |
+| Natera | Senior Bioinformatics Scientist | Bioinformatics Scientist | General bioinformatics and computational biology | US Remote | Remote |  |  |  | [Source](https://job-boards.greenhouse.io/natera/jobs/6024028004) |
+| Natera | Senior Bioinformatics Scientist | Bioinformatics Scientist | General bioinformatics and computational biology | San Carlos, CA | Hybrid |  |  |  | [Source](https://job-boards.greenhouse.io/natera/jobs/6093622004) |
 | Neptune Bio | Computational Biologist | Computational Biologist | General bioinformatics and computational biology | New York | On-site |  |  |  | [Source](https://job-boards.greenhouse.io/neptunebio/jobs/4969002007) |
 | NewLimit | Computational Biologist | Computational Biologist | General bioinformatics and computational biology | South San Francisco, CA | On-site |  |  |  | [Source](https://job-boards.greenhouse.io/newlimit/jobs/5819398004) |
 | Personalis | Sr. Bioinformatics Scientist - DNA Technology Development & Applied AI | Bioinformatics Scientist | General bioinformatics and computational biology | Fremont, CA | Hybrid |  |  | Machine learning / AI | [Source](https://job-boards.greenhouse.io/personalisinc/jobs/7738302003) |
