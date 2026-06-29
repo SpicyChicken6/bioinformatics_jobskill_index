@@ -1,7 +1,7 @@
 # Bioinformatics Jobs Board
 
-Snapshot date: 2026-06-22  
-Verified live roles: 10  
+Snapshot date: 2026-06-29  
+Verified live roles: 9  
 Unique companies: 7
 
 This board is regenerated from public company job-board endpoints and direct official job pages. The snapshot date is the date of retrieval in America/Chicago.
@@ -15,6 +15,5 @@ This board is regenerated from public company job-board endpoints and direct off
 | Neptune Bio | Computational Biologist | Computational Biologist | General bioinformatics and computational biology | New York | On-site |  |  |  | [Source](https://job-boards.greenhouse.io/neptunebio/jobs/4969002007) |
 | NewLimit | Computational Biologist | Computational Biologist | General bioinformatics and computational biology | South San Francisco, CA | On-site |  |  |  | [Source](https://job-boards.greenhouse.io/newlimit/jobs/5819398004) |
 | Personalis | Sr. Bioinformatics Scientist - DNA Technology Development & Applied AI | Bioinformatics Scientist | General bioinformatics and computational biology | Fremont, CA | Hybrid |  |  | Machine learning / AI | [Source](https://job-boards.greenhouse.io/personalisinc/jobs/7738302003) |
-| Personalis | Sr. Bioinformatics Scientist – Novel Cell Free DNA Applications | Bioinformatics Scientist | New cfDNA product opportunities | Fremont, CA | Hybrid |  |  |  | [Source](https://job-boards.greenhouse.io/personalisinc/jobs/7617458003) |
 | Profluent | Lead Bioinformatics Scientist, NGS | Bioinformatics Scientist | General bioinformatics and computational biology | Emeryville, California, United States; Hybrid (2-3 days on-site) | Hybrid |  |  | NGS / genomics | [Source](https://job-boards.greenhouse.io/profluent/jobs/4983485008) |
 | Recursion | Associate Principal Computational Biologist, Neuroscience | Computational Biologist | General bioinformatics and computational biology | New York, New York; Salt Lake City, Utah | Hybrid |  |  |  | [Source](https://job-boards.greenhouse.io/recursionpharmaceuticals/jobs/7583094) |
