@@ -1,7 +1,7 @@
 # Bioinformatics Jobs Board
 
-Snapshot date: 2026-07-06  
-Verified live roles: 7  
+Snapshot date: 2026-07-13  
+Verified live roles: 9  
 Unique companies: 6
 
 This board is regenerated from public company job-board endpoints and direct official job pages. The snapshot date is the date of retrieval in America/Chicago.
@@ -15,3 +15,5 @@ This board is regenerated from public company job-board endpoints and direct off
 | Personalis | Sr. Bioinformatics Scientist - DNA Technology Development & Applied AI | Bioinformatics Scientist | General bioinformatics and computational biology | Fremont, CA | Hybrid |  |  | Machine learning / AI | [Source](https://job-boards.greenhouse.io/personalisinc/jobs/7738302003) |
 | Profluent | Lead Bioinformatics Scientist, NGS | Bioinformatics Scientist | General bioinformatics and computational biology | Emeryville, California, United States; Hybrid (2-3 days on-site) | Hybrid |  |  | NGS / genomics | [Source](https://job-boards.greenhouse.io/profluent/jobs/4983485008) |
 | Recursion | Associate Principal Computational Biologist, Neuroscience | Computational Biologist | General bioinformatics and computational biology | New York, New York; Salt Lake City, Utah | Hybrid |  |  |  | [Source](https://job-boards.greenhouse.io/recursionpharmaceuticals/jobs/7583094) |
+| Recursion | Senior Computational Biologist - Early Discovery Oncology | Computational Biologist | Oncology assay and algorithm development | New York, New York; Salt Lake City, Utah | Hybrid |  |  | Cancer / liquid biopsy / biomarkers | [Source](https://job-boards.greenhouse.io/recursionpharmaceuticals/jobs/8054131) |
+| Recursion | Senior Computational Biologist – Early Discovery Immunology | Computational Biologist | General bioinformatics and computational biology | New York, New York; Salt Lake City, Utah | Hybrid |  |  |  | [Source](https://job-boards.greenhouse.io/recursionpharmaceuticals/jobs/8054379) |
