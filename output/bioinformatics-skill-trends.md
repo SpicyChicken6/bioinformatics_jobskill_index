@@ -1,6 +1,6 @@
 # Bioinformatics Skill Trends
 
-Snapshot date: 2026-07-13  
+Snapshot date: 2026-07-20  
 Verified live roles: 9  
 Unique companies: 6
 
@@ -15,9 +15,9 @@ Unique companies: 6
 - Bioinformatics Scientist: 2
 
 ## Work-mode mix
-- Hybrid: 5
+- Hybrid: 4
+- Remote: 3
 - On-site: 2
-- Remote: 2
 
 ## Top skill index
 - Machine learning / AI: 3/9 roles (33.3%)
