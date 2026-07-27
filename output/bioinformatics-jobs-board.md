@@ -1,8 +1,8 @@
 # Bioinformatics Jobs Board
 
-Snapshot date: 2026-07-20  
-Verified live roles: 9  
-Unique companies: 6
+Snapshot date: 2026-07-27  
+Verified live roles: 8  
+Unique companies: 5
 
 This board is regenerated from public company job-board endpoints and direct official job pages. The snapshot date is the date of retrieval in America/Chicago.
 
@@ -12,7 +12,6 @@ This board is regenerated from public company job-board endpoints and direct off
 | GATC Health | Bioinformatics Analyst - UT | Bioinformatics Analyst | Aging, single-cell, and target discovery | Salt Lake City, UT | Remote | Prep and Process data through GATC platform based on customer or internal end user requirements.; Implement primary and secondary analysis tools for GATC’s assays.; Work with cross-disciplinary R&D teams to develop and implement new discovery and risk assessment product applications. | Degree in computational biology, bioinformatics, computer science or similar.; Experience analyzing complex multi-omic datasets, including human or single cell data.; Experience implementing, and evaluating novel bioinformatics algorithms and pipelines. | Python, NGS / genomics, Pipelines / workflow orchestration, Single-cell / multi-omics, Cross-functional collaboration, Scientific writing / communication, Experimental design / assay partnership, Cloud / scalable compute, Machine learning / AI, Data visualization / reporting, Multi-omics integration, Customer-facing / platform migration | [Source](https://jobs.lever.co/gatchealth/a1eea9b2-db8a-42c5-9e0d-033a467a08a1) |
 | Neptune Bio | Computational Biologist | Computational Biologist | General bioinformatics and computational biology | New York | On-site |  |  |  | [Source](https://job-boards.greenhouse.io/neptunebio/jobs/4969002007) |
 | NewLimit | Computational Biologist | Computational Biologist | General bioinformatics and computational biology | South San Francisco, CA | On-site |  |  |  | [Source](https://job-boards.greenhouse.io/newlimit/jobs/5819398004) |
-| Personalis | Sr. Bioinformatics Scientist - DNA Technology Development & Applied AI | Bioinformatics Scientist | General bioinformatics and computational biology | Fremont, CA | Hybrid |  |  | Machine learning / AI | [Source](https://job-boards.greenhouse.io/personalisinc/jobs/7738302003) |
 | Profluent | Lead Bioinformatics Scientist, NGS | Bioinformatics Scientist | General bioinformatics and computational biology | Emeryville, California, United States; Hybrid (2-3 days on-site) | Hybrid |  |  | NGS / genomics | [Source](https://job-boards.greenhouse.io/profluent/jobs/4983485008) |
 | Recursion | Associate Principal Computational Biologist, Neuroscience | Computational Biologist | General bioinformatics and computational biology | New York, New York; Remote Opportunity - Canada; Salt Lake City, Utah; Toronto, Ontario | Remote |  |  |  | [Source](https://job-boards.greenhouse.io/recursionpharmaceuticals/jobs/7583094) |
 | Recursion | Senior Computational Biologist - Early Discovery Oncology | Computational Biologist | Oncology assay and algorithm development | New York, New York; Salt Lake City, Utah | Hybrid |  |  | Cancer / liquid biopsy / biomarkers | [Source](https://job-boards.greenhouse.io/recursionpharmaceuticals/jobs/8054131) |

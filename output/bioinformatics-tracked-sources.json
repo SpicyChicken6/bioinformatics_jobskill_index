@@ -1,5 +1,5 @@
 {
-  "snapshot_date": "2026-07-20",
+  "snapshot_date": "2026-07-27",
   "summary": {
     "active_source_count": 11,
     "successful_source_count": 8,
@@ -69,7 +69,7 @@
       "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/personalisinc/jobs?content=true",
       "browse_url": "https://boards.greenhouse.io/personalisinc",
       "status": "ok",
-      "jobs_found": 1,
+      "jobs_found": 0,
       "notes": ""
     },
     {
