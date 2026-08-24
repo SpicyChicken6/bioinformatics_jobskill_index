@@ -1,5 +1,5 @@
 {
-  "snapshot_date": "2026-08-17",
+  "snapshot_date": "2026-08-24",
   "summary": {
     "active_source_count": 11,
     "successful_source_count": 7,
@@ -24,7 +24,7 @@
       "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/newlimit/jobs?content=true",
       "browse_url": "https://boards.greenhouse.io/newlimit",
       "status": "ok",
-      "jobs_found": 1,
+      "jobs_found": 0,
       "notes": ""
     },
     {
