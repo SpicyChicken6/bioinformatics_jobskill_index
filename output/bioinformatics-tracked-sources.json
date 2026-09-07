@@ -1,5 +1,5 @@
 {
-  "snapshot_date": "2026-08-31",
+  "snapshot_date": "2026-09-07",
   "summary": {
     "active_source_count": 11,
     "successful_source_count": 7,
@@ -51,7 +51,7 @@
       "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/profluent/jobs?content=true",
       "browse_url": "https://boards.greenhouse.io/profluent",
       "status": "ok",
-      "jobs_found": 1,
+      "jobs_found": 0,
       "notes": ""
     },
     {
@@ -60,7 +60,7 @@
       "endpoint_url": "https://boards-api.greenhouse.io/v1/boards/natera/jobs?content=true",
       "browse_url": "https://boards.greenhouse.io/natera",
       "status": "ok",
-      "jobs_found": 0,
+      "jobs_found": 2,
       "notes": ""
     },
     {
