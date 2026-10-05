@@ -1,6 +1,6 @@
 # Bioinformatics Jobs Board
 
-Snapshot date: 2026-09-28  
+Snapshot date: 2026-10-05  
 Verified live roles: 2  
 Unique companies: 1
 
