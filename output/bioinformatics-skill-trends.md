@@ -1,7 +1,7 @@
 # Bioinformatics Skill Trends
 
-Snapshot date: 2026-10-26  
-Verified live roles: 5  
+Snapshot date: 2026-11-02  
+Verified live roles: 7  
 Unique companies: 3
 
 ## Method
@@ -10,24 +10,24 @@ Unique companies: 3
 - Trend tags are normalized from responsibilities and requirements so they can be compared across companies.
 
 ## Role mix
-- Bioinformatics Scientist: 3
+- Bioinformatics Scientist: 5
 - Computational Biologist: 2
 
 ## Work-mode mix
-- Hybrid: 4
-- Remote: 1
+- Hybrid: 5
+- Remote: 2
 
 ## Top skill index
-- Cancer / liquid biopsy / biomarkers: 3/5 roles (60.0%)
-- Machine learning / AI: 2/5 roles (40.0%)
-- Cross-functional collaboration: 1/5 roles (20.0%)
+- Cancer / liquid biopsy / biomarkers: 5/7 roles (71.4%)
+- Machine learning / AI: 2/7 roles (28.6%)
+- Cross-functional collaboration: 1/7 roles (14.3%)
 
 ## What is trending
-- Python appears in 0/5 live roles and remains the baseline programming skill.
-- Pipeline or workflow work appears in 0/5 roles, which keeps production-oriented bioinformatics central to the market.
-- Oncology or biomarker-oriented work appears in 3/5 roles in this snapshot.
-- Cloud appears in 0/5 roles and ML or AI appears in 2/5 roles.
-- Explicit workflow engines such as Nextflow, WDL, or Snakemake appear in 0/5 roles.
+- Python appears in 0/7 live roles and remains the baseline programming skill.
+- Pipeline or workflow work appears in 0/7 roles, which keeps production-oriented bioinformatics central to the market.
+- Oncology or biomarker-oriented work appears in 5/7 roles in this snapshot.
+- Cloud appears in 0/7 roles and ML or AI appears in 2/7 roles.
+- Explicit workflow engines such as Nextflow, WDL, or Snakemake appear in 0/7 roles.
 
 ## Source notes
 - Greenhouse source 'neptunebio' failed: HTTP Error 404: Not Found
